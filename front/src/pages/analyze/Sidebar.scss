@@ -1,0 +1,16 @@
+@use "../../styles/_colors" as colors;
+
+.sidebar {
+  // change 6rem to a value controlled by a variable
+  position: sticky;
+  top: 5rem;
+  height: calc(100vh - 6rem);
+  overflow-y: auto;
+  width: 350px;
+  border: 1px solid colors.$lightGrey;
+  border-radius: 10px;
+
+  .sidebar-contents {
+    padding: 30px;
+  }
+}

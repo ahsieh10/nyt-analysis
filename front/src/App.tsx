@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Analyze from "./pages/Analyze";
+import Home from "./pages/home/Home";
+import Analyze from "./pages/analyze/Analyze";
+import { useEffect } from "react";
 import "./App.scss";
 
 function App() {

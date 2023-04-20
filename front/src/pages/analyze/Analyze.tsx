@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import Navbar from "../../components/Navbar";
+import Sidebar from "./Sidebar";
+import "./Analyze.scss";
+import Results from "./Results";
 
 const Analyze = () => {
   const [params, setParams] = useSearchParams();
@@ -13,16 +17,13 @@ const Analyze = () => {
   }, [params]);
 
   return (
-    <>
-      <h1>This is the Analyze page.</h1>
-      <input
-        value={input}
-        type="text"
-        onChange={(e) => {
-          setInput(e.target.value);
-        }}
-      />
-    </>
+    <div className="analyze">
+      <Navbar input={input} setInput={setInput} onSubmit={() => {}}/>
+      <div className="main-container">
+        <Sidebar />
+        <Results />
+      </div>
+    </div>
   );
 };
 

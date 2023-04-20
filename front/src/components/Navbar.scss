@@ -1,0 +1,46 @@
+@use "../styles/_colors" as colors;
+
+$horizontalMargin: 4rem;
+$grey: #a7a7a7;
+
+.navbar {
+  position: sticky;
+  top: 0;
+  height: 5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+
+  .logo {
+    font-weight: 500;
+  }
+
+  .input-box {
+    display: flex;
+    align-items: center;
+    color: $grey;
+    font-size: 1rem;
+
+    input {
+      border: none;
+      outline: none;
+      padding: 10px;
+    }
+
+    button {
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      border-radius: 5px;
+      border: none;
+      background-color: colors.$mainBlue;
+      color: #ffffff;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        background-color: #000000;
+      }
+    }
+  }
+}

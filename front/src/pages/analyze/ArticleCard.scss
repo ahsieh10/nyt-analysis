@@ -1,0 +1,58 @@
+@use "../../styles/_colors" as colors;
+
+$cardHeight: 80px;
+
+.card-link {
+  text-decoration: none;
+  color: #000000;
+}
+
+.card {
+  cursor: pointer;
+  height: $cardHeight;
+  padding: 0 20px;
+  border: 1px solid colors.$lightGrey;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+  transition: all 0.15s ease-in-out;
+
+  .card-text {
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    .heading {
+      font-size: 14px;
+      font-weight: 500;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .subheading {
+      font-size: 13px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      //   color: #5b5b5b;
+    }
+  }
+
+  .card-img {
+    flex-shrink: 0;
+    width: calc($cardHeight - 25px);
+    height: calc($cardHeight - 25px);
+    border-radius: 50%;
+  }
+}
+
+.active {
+  background-color: colors.$mainBlue;
+  color: #ffffff;
+  border-color: colors.$mainBlue;
+  transform: scale(1.05);
+}
