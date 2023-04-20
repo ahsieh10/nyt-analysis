@@ -1,6 +1,6 @@
 package edu.brown.cs32.src.news;
 
-import edu.brown.cs32.src.news.ArticleSource;
+import edu.brown.cs32.src.interfaces.ArticleSource;
 import java.util.List;
 
 /**
@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class NYTArticleCache implements ArticleSource {
   @Override
-  public List<String> getArticles() {
+  public List<String> getArticles(String keyword) {
     return null;
   }
 }

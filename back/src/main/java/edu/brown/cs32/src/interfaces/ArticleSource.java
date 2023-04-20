@@ -1,4 +1,4 @@
-package edu.brown.cs32.src.news;
+package edu.brown.cs32.src.interfaces;
 
 import java.util.List;
 
@@ -7,5 +7,5 @@ import java.util.List;
  * strategy pattern, may also be helpful for testing/mocking later
  */
 public interface ArticleSource {
-  List<String> getArticles();
+  List<String> getArticles(String keyword);
 }
