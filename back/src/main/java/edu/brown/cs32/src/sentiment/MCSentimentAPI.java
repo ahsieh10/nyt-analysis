@@ -42,7 +42,7 @@ public class MCSentimentAPI {
     text = text.replaceAll("/", "%20");
     text = text.replaceAll("=", "%20");
     text = text.replaceAll("\\?", "%20");
-    String url = "https://api.meaningcloud.com/sentiment-2.1?key=" + MCKey.token +
+    String url = "https://api.meaningcloud.com/sentiment-2.1?key=" + Keys.MCKey +
     "&lang=en&txt=" + text + "&model=general";
     return url.replaceAll("\\s+","%20");
   }
