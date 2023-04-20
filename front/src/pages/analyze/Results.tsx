@@ -1,9 +1,15 @@
 import "./Results.scss";
 
-type Props = {};
+interface ResultsProps {
+  query: string;
+}
 
-const Results = (props: Props) => {
-  return <div className="results"></div>;
+const Results = ({ query }: ResultsProps) => {
+  return (
+    <div className="results">
+      <h2>Results for "{`${query}`}"</h2>
+    </div>
+  );
 };
 
 export default Results;
