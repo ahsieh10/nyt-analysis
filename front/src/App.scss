@@ -1,16 +1,46 @@
 @use "./styles/_colors" as colors;
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap");
+
+/* Global styles */
 
 * {
   margin: 0;
   padding: 0;
 }
 
+body {
+  overflow: hidden;
+}
+
 .App {
   height: 100vh;
   font-family: "Playfair Display", serif;
+  overflow-y: auto;
 }
 
-.highlight-text {
+.main-red {
   color: colors.$mainRed;
+}
+
+.main-blue {
+  color: colors.$mainBlue;
+}
+
+::-webkit-input-placeholder {
+  font-family: "Playfair Display", serif;
+  font-size: 16px;
+  color: #7a7a7a;
+}
+
+input {
+  font-family: "Playfair Display", serif;
+  font-size: 16px;
+  color: #383838;
+}
+
+.section-subheading {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: colors.$headingGrey;
 }

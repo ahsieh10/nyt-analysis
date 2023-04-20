@@ -1,0 +1,121 @@
+@use "../../styles/_colors" as colors;
+
+.home {
+  height: 100%;
+  display: flex;
+  overflow-x: hidden;
+
+  .home-text-wrapper {
+    flex: 2;
+    display: flex;
+    padding-left: 4rem;
+    padding-right: 1rem;
+
+    .home-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+
+      .welcome-text {
+        font-family: "Tangerine", cursive;
+        font-size: 3.2rem;
+      }
+
+      h1 {
+        font-size: 3.6rem;
+        font-weight: 500;
+      }
+
+      .input-box {
+        margin-top: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        input {
+          padding: 15px;
+          width: 50%;
+          border-radius: 2rem;
+          background-color: #ebebeb;
+          outline: none;
+          border: none;
+        }
+
+        .search-btn {
+          cursor: pointer;
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          border: none;
+          background-color: colors.$mainBlue;
+          transition: all 0.2s ease-in-out;
+          color: #ffffff;
+
+          &:hover {
+            background-color: #000000;
+          }
+        }
+      }
+    }
+  }
+
+  .home-img {
+    flex: 1;
+    height: 100%;
+    opacity: 0.4;
+
+    img {
+      filter: grayscale(100%);
+      object-fit: cover;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .home {
+    .home-text-wrapper {
+      .home-text {
+        h1 {
+          font-size: 3rem;
+        }
+
+        .welcome-text {
+          font-size: 2.5rem;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .home {
+    flex-direction: column;
+
+    .home-text-wrapper {
+      text-align: center;
+      padding: 0 2rem;
+
+      .home-text {
+        .welcome-text {
+          font-size: 2.2rem;
+        }
+
+        h1 {
+          font-size: 2.5rem;
+        }
+
+        .input-box {
+          justify-content: center;
+        }
+      }
+    }
+
+    .home-img {
+      display: none;
+    }
+  }
+}
