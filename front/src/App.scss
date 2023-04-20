@@ -1,0 +1,16 @@
+@use "./styles/_colors" as colors;
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  height: 100vh;
+  font-family: "Playfair Display", serif;
+}
+
+.highlight-text {
+  color: colors.$mainRed;
+}
