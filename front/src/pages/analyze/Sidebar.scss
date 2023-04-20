@@ -2,6 +2,7 @@
 
 .sidebar {
   // change 6rem to a value controlled by a variable
+  flex-shrink: 0;
   position: sticky;
   top: 5rem;
   height: calc(100vh - 6rem);
@@ -11,6 +12,28 @@
   border-radius: 10px;
 
   .sidebar-contents {
-    padding: 30px;
+    padding: 35px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .home {
+    .home-text-wrapper {
+      .home-text {
+        h1 {
+          font-size: 3rem;
+        }
+
+        .welcome-text {
+          font-size: 2.5rem;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .sidebar {
+    display: none;
   }
 }
