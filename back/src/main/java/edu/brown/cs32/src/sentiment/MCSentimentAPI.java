@@ -1,7 +1,8 @@
 package edu.brown.cs32.src.sentiment;
 
-import edu.brown.cs32.src.privatekey.MCKey;
+import edu.brown.cs32.src.interfaces.SentimentQuery;
 import edu.brown.cs32.src.responses.JSONConverter;
+import edu.brown.cs32.src.privatekey.Keys;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,7 +14,7 @@ import java.util.List;
 /**
  * This class uses the 10 NYT article abstracts to get the sentiment value
  */
-public class MCSentimentAPI {
+public class MCSentimentAPI implements SentimentQuery {
 
   /**
    * Given a list of 10 article abstracts, it will combine it into one string and analyze the
