@@ -1,10 +1,13 @@
 package edu.brown.cs32.src;
 
+import edu.brown.cs32.src.news.NYTArticleAPI;
+import edu.brown.cs32.src.news.NYTArticleCache;
 import edu.brown.cs32.src.responses.ResponseCreator;
 import spark.QueryParamsMap;
 import spark.Request;
 import spark.Response;
 import spark.Route;
+import java.util.Map;
 
 /**
  * This class handles search queries and feed them into the API pipeline to return
@@ -12,7 +15,11 @@ import spark.Route;
  */
 public class SearchHandler implements Route {
 
-  public SearchHandler(){}
+  NYTArticleCache cache;
+
+  public SearchHandler(NYTArticleCache cache){
+    this.cache = cache;
+  }
 
   @Override
   public Object handle(Request request, Response response) {
@@ -24,6 +31,13 @@ public class SearchHandler implements Route {
     if (qm.toMap().isEmpty() || keyword == null) {
       return ResponseCreator.handleBadRequest("keyword");
     }
+
+
+    Map<String, Object> articles = this.cache.getArticles(keyword);
+    //extract articles
+    //get abstracts
+    //send abstracts into sentiment api
+    //return results
 
     return "";
 
