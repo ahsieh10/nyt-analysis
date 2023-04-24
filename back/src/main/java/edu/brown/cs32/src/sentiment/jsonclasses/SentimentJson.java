@@ -1,14 +1,15 @@
-package edu.brown.cs32.src.sentiment;
+package edu.brown.cs32.src.sentiment.jsonclasses;
 
-import com.squareup.moshi.Json;
+import java.util.List;
 
 public class SentimentJson {
   public String model;
   public String score_tag;
   public String agreement;
   public String subjectivity;
-  public int confidence;
+  public Integer confidence;
   public String irony;
+  public List<Sentence> sentence_list;
 
 //  public record Sentiment(
 //      @Json(name = "status") Status status,

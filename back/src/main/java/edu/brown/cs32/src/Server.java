@@ -3,8 +3,6 @@ package edu.brown.cs32.src;
 import static spark.Spark.after;
 
 
-import edu.brown.cs32.src.news.NYTArticleAPI;
-import edu.brown.cs32.src.news.NYTArticleCache;
 import spark.Spark;
 
 /**
@@ -36,10 +34,8 @@ public class Server {
       response.header("Access-Control-Allow-Methods", "*");
     });
 
-    NYTArticleCache query = new NYTArticleCache(1000, 10, new NYTArticleAPI());
-
     // Setting up the handler for the GET endpoints
-    Spark.get("search", new SearchHandler(query));
+    Spark.get("search", new SearchHandler());
 
     Spark.init();
     Spark.awaitInitialization();
