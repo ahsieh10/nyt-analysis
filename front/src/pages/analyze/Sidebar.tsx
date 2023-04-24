@@ -1,11 +1,14 @@
-import { mockArticleData } from "../../mocks/articles";
 import ArticleCard from "./ArticleCard";
 import { motion } from "framer-motion";
 import { animationDuration } from "../../constants/constants";
 import { Scrollbars } from "react-custom-scrollbars-2";
+import { Result } from "../../interfaces/interfaces";
 import "./Sidebar.scss";
 
-const Sidebar = () => {
+interface SidebarProps {
+  result: Result;
+}
+const Sidebar = ({ result }: SidebarProps) => {
   return (
     <motion.div
       className="sidebar"
@@ -16,8 +19,8 @@ const Sidebar = () => {
     >
       <Scrollbars style={{ width: "100%", height: "100%" }}>
         <div className="sidebar-contents">
-          <div className="section-subheading"> ARTICLES ANALYZED</div>
-          {mockArticleData.map((article) => (
+          <div className="section-subheading"> Articles Analyzed</div>
+          {result.articles.map((article) => (
             <ArticleCard key={article._id} article={article} />
           ))}
         </div>

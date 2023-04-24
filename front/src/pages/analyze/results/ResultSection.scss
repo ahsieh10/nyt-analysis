@@ -1,0 +1,25 @@
+@use "../../../styles/_colors" as colors;
+
+.result-section {
+  margin: 1rem 0;
+  padding: 25px;
+  background-color: colors.$lightBlue;
+  border-radius: 10px;
+
+  .result-subheading {
+    text-transform: uppercase;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+}
+
+.horizontal {
+  display: flex;
+  justify-content: space-between;
+}
+
+.vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

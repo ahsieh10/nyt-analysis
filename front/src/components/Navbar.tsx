@@ -1,15 +1,17 @@
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.scss";
 
 interface NavbarProps {
-  input: string;
-  setInput: React.Dispatch<React.SetStateAction<string>>;
-  onSubmit: () => void;
+  initialInput: string;
+  submitInput: (input: string) => void;
 }
 
-const Navbar = ({ input, setInput, onSubmit }: NavbarProps) => {
+const Navbar = ({ initialInput, submitInput }: NavbarProps) => {
+  const [input, setInput] = useState(initialInput);
+
   return (
     <nav className="navbar">
       <Link to="/" className="logo">
@@ -27,7 +29,7 @@ const Navbar = ({ input, setInput, onSubmit }: NavbarProps) => {
             }}
           />
         </div>
-        <button className="search-btn" onClick={onSubmit}>
+        <button className="search-btn" onClick={() => submitInput(input)}>
           <FontAwesomeIcon icon={faSearch} />
         </button>
       </div>

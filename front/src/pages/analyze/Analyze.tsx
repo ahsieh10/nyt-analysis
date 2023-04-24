@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Sidebar from "./Sidebar";
-import Results from "./Results";
-import "./Analyze.scss";
+import Results from "./results/Results";
 import Scrollbars from "react-custom-scrollbars-2";
+import { mockResult } from "../../mocks/result";
+import "./Analyze.scss";
 
 const Analyze = () => {
   const [params, setParams] = useSearchParams();
@@ -19,12 +20,12 @@ const Analyze = () => {
   }, [params]);
 
   return (
-    <Scrollbars width="100%" height="100%">
+    <Scrollbars width="100%" height="100%" autoHide>
       <div className="analyze">
-        <Navbar input={input} setInput={setInput} onSubmit={() => {}} />
+        <Navbar initialInput={input} submitInput={(input) => setInput(input)} />
         <div className="main-container">
-          <Sidebar />
-          <Results query={input} />
+          <Sidebar result={mockResult} />
+          <Results result={{ ...mockResult, query: input }} />
         </div>
       </div>
     </Scrollbars>

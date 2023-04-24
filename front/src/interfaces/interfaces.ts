@@ -71,3 +71,37 @@ export interface Article {
 //   imageUrl: string; // filter multimedia by subType = "thumbnail";
 //   pubDate: string; // pub_date
 // }
+
+interface APIResponse {
+  overallSentiment: string;
+  articles: [
+    {
+      name: string;
+      url: string;
+      sentiment: string;
+    },
+    {
+      name: string;
+      url: string;
+      sentiment: string;
+    },
+    {
+      name: string;
+      url: string;
+      sentiment: string;
+    }
+  ];
+}
+
+export interface WordDatum {
+  text: string;
+  value: number;
+}
+
+export interface Result {
+  query: string;
+  articles: Article[];
+  overallSentiment: string;
+  mostBiasedSentences: string[];
+  keywords: WordDatum[];
+}
