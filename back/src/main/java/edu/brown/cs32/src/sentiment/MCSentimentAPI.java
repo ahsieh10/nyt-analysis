@@ -98,29 +98,45 @@ public class MCSentimentAPI implements SentimentQuery {
    * @return
    * @throws IllegalStateException
    */
-   public List<Score> getSentences() throws IllegalStateException {
-    return this.orderSentenceScores(this.assignSentenceScores());
+   public List<Score> getRankedSentences() throws IllegalStateException {
+//    return this.orderSentenceScores(this.assignSentenceScores());
+     if (this.sentimentData == null) {
+       //TODO: throw error?
+       throw new IllegalStateException("Must get sentiment before ranking sentences.");
+     } else {
+       return this.calculateScores(this.sentimentData);
+     }
    }
 
+//  /**
+//   * Assigns sentences their scores and updates it based on confidence, polarity terms, score tags
+//   * @return list of sentences and their scores, not ordered
+//   * @throws IllegalStateException if this method is called before sentiment is analyzed
+//   */
+//  private List<Score> assignSentenceScores() throws IllegalStateException {
+//    if (this.sentimentData == null) {
+//      //TODO: throw error?
+//      throw new IllegalStateException("Must get sentiment before ranking sentences.");
+//    } else {
+//      return calculateScores(this.sentimentData);
+//    }
+//  }
+
   /**
-   * Assigns sentences their scores and updates it based on confidence, polarity terms, score tags
-   * @return list of sentences and their scores, not ordered
-   * @throws IllegalStateException if this method is called before sentiment is analyzed
+   * Calls helper methods to update scores used to rank sentences
+   * (Public for testing purposes)
+   * @param sentimentData - the sentiment json
+   * @return returns
    */
-  public List<Score> assignSentenceScores() throws IllegalStateException {
+  public List<Score> calculateScores(SentimentJson sentimentData) {
     List<Score> unorderedScores = new ArrayList<>();
-    if (this.sentimentData == null) {
-      //TODO: throw error?
-      throw new IllegalStateException("Must get sentiment before ranking sentences.");
-    } else {
-      for (Sentence currSentence : this.sentimentData.sentence_list) {
-        Score currScore = new Score(currSentence.text, this.rankScoreTags(currSentence.score_tag));
-        currScore.setScore(this.rankPolarityTerms(currSentence.segment_list, currScore.getScore()));
-        currScore.setScore(this.rankConfidence(currSentence.confidence, currScore.getScore()));
-        unorderedScores.add(currScore);
-      }
-      return unorderedScores;
+    for (Sentence currSentence : sentimentData.sentence_list) {
+      Score currScore = new Score(currSentence.text, this.rankScoreTags(currSentence.score_tag));
+      currScore.setScore(this.rankPolarityTerms(currSentence.segment_list, currScore.getScore()));
+      currScore.setScore(this.rankConfidence(currSentence.confidence, currScore.getScore()));
+      unorderedScores.add(currScore);
     }
+    return this.orderSentenceScores(unorderedScores);
   }
 
   /**
@@ -128,7 +144,7 @@ public class MCSentimentAPI implements SentimentQuery {
    * @param scores the list of scores (sentences and their score values)
    * @return the ordered list of scores
    */
-  public List<Score> orderSentenceScores(List<Score> scores) {
+  private List<Score> orderSentenceScores(List<Score> scores) {
     for(int i = 0; i <scores.size() - 1; i++) {
       for(int j = 0; j <scores.size() - i - 1; j++) {
 
@@ -189,12 +205,12 @@ public class MCSentimentAPI implements SentimentQuery {
    * @return new score
    */
   private Double rankConfidence(Integer confidence, Double currScore) {
-    if (confidence < 25) {
-      return currScore + (-0.75 * currScore);
-    } else if (confidence < 50) {
-      return currScore + (-0.5 * currScore);
-    } else if (confidence < 95)  {
-      return currScore + (-0.25 * currScore);
+    if (confidence < 93) {
+      return currScore + (-0.4 * currScore);
+    } else if (confidence < 96) {
+      return currScore + (-0.3 * currScore);
+    } else if (confidence < 98)  {
+      return currScore + (-0.2 * currScore);
     } else {
       return currScore;
     }

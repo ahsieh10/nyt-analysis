@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import edu.brown.cs32.mocks.MockSentimentJson;
 import edu.brown.cs32.src.responses.JSONConverter;
 import edu.brown.cs32.src.sentiment.MCSentimentAPI;
+import edu.brown.cs32.src.sentiment.Score;
 import edu.brown.cs32.src.sentiment.jsonclasses.SentimentJson;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,8 +35,8 @@ public class TestMCSentimentAPI {
     articles.add("sentence number 1 ends here.");
     articles.add("sentence two with / symbol and = symbol and question ? symbol.");
     articles.add("sentence 3 with   weird       spaces. ] [ \" \\ +$#@!~%^&*()_+;><");
-    MCSentimentAPI Tester = new MCSentimentAPI();
-    String result = Tester.getURL(articles);
+    MCSentimentAPI tester = new MCSentimentAPI();
+    String result = tester.getURL(articles);
     String expected = "https://api.meaningcloud.com/sentiment-2.1?"
         + "key=f5cb66634417b2b3b554b1d3359bc1f2&lang=en&txt="
         + "sentence%20number%201%20ends%20here.sentence%20two%20with%20symbol%20and%20symbol%20and%20question%20.symbol."
@@ -46,13 +47,27 @@ public class TestMCSentimentAPI {
     articles2.add("This food does not taste good. Won't come back again.");
     articles2.add("The service could not have been better! But they were rude to others.");
     articles2.add("Spent too much money for food that made me hungry.");
-    String result2 = Tester.getURL(articles2);
+    String result2 = tester.getURL(articles2);
     String expected2 = "https://api.meaningcloud.com/sentiment-2.1?"
         + "key=f5cb66634417b2b3b554b1d3359bc1f2&lang=en&txt="
         + "This%20food%20does%20not%20taste%20good.%20Won%20t%20come%20back%20again."
         + "The%20service%20could%20not%20have%20been%20better!%20But%20they%20were%20rude%20to%20others."
         + "Spent%20too%20much%20money%20for%20food%20that%20made%20me%20hungry.&model=general";
     assertEquals(expected2, result2);
+  }
+
+  @Test
+  public void testRanking() throws IOException {
+    MCSentimentAPI tester = new MCSentimentAPI();
+    SentimentJson data = JSONConverter.fromJson(MockSentimentJson.bigMockJson, SentimentJson.class);
+    List<Score> result = tester.calculateScores(data);
+    assertEquals(result.get(0).getText(), "Spent too much money for food that made me hungry but there was a good environment if not for the mediocre view");
+    assertEquals(result.get(0).getScore(), -12.5);
+    assertEquals(result.get(1).getText(), "Spent the day at the park, found a lucky penny, and now I have to go home but I would rather not");
+    assertEquals(result.get(1).getScore(), 6);
+    assertEquals(result.get(2).getText(), "Wow this could have been so good but I wish there was more to it");
+    assertEquals(result.get(2).getScore(), 8);
+
   }
 
 }
