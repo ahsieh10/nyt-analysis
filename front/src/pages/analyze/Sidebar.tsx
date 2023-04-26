@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { animationDuration } from "../../constants/constants";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import { Result } from "../../interfaces/interfaces";
+import Popup from "./AboutPopup"
 import "./Sidebar.scss";
 
 interface SidebarProps {
