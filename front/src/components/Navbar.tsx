@@ -8,9 +8,10 @@ import "./Navbar.scss";
 interface NavbarProps {
   initialInput: string;
   submitInput: (input: string) => void;
+  togglePopup: () => void;
 }
 
-const Navbar = ({ initialInput, submitInput }: NavbarProps) => {
+const Navbar = ({ initialInput, submitInput, togglePopup }: NavbarProps) => {
   const [input, setInput] = useState(initialInput);
 
   return (
@@ -18,7 +19,9 @@ const Navbar = ({ initialInput, submitInput }: NavbarProps) => {
       <Link to="/" className="logo">
         <span className="main-blue">NYT</span> Sentiment Analysis
       </Link>
-      <AboutPopup />
+      <button onClick={togglePopup} className="open-btn">
+        About
+      </button>
       <div className="input-area">
         <div className="input-box">
           <FontAwesomeIcon icon={faSearch} />

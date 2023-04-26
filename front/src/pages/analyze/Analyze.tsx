@@ -6,11 +6,17 @@ import Results from "./results/Results";
 import Scrollbars from "react-custom-scrollbars-2";
 import { mockResult } from "../../mocks/result";
 import "./Analyze.scss";
+import Popup from "./AboutPopup";
 
 const Analyze = () => {
   const [params, setParams] = useSearchParams();
   const [input, setInput] = useState("");
   const [sentiment, setSentiment] = useState("");
+  const [popup, setPopup] = useState(false);
+
+  const togglePopup = () => {
+    setPopup(!popup);
+  };
 
   useEffect(() => {
     const query = params.get("query");
@@ -22,12 +28,17 @@ const Analyze = () => {
   return (
     <Scrollbars width="100%" height="100%" autoHide>
       <div className="analyze">
-        <Navbar initialInput={input} submitInput={(input) => setInput(input)} />
+        <Navbar
+          initialInput={input}
+          submitInput={(input) => setInput(input)}
+          togglePopup={togglePopup}
+        />
         <div className="main-container">
           <Sidebar result={mockResult} />
           <Results result={{ ...mockResult, query: input }} />
         </div>
       </div>
+      <Popup popupActive={popup} togglePopup={togglePopup} />
     </Scrollbars>
   );
 };

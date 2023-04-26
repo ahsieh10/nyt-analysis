@@ -1,20 +1,14 @@
 import "./AboutPopup.scss";
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 
-const Popup = () => {
-  const [popup, setPopup] = useState(false);
-
-  const togglePopup = () => {
-    setPopup(!popup)
-  }
-
+interface PopupProps {
+  popupActive: boolean;
+  togglePopup: () => void;
+}
+const Popup = ({ popupActive, togglePopup }: PopupProps) => {
   return (
     <>
-      <button onClick={togglePopup} className="open-btn">
-        About
-      </button>
-
-      {popup && (
+      {popupActive && (
         <div className="about-page">
           <div className="overlay"> </div>
           <div className="popup-content">
@@ -28,7 +22,6 @@ const Popup = () => {
       )}
     </>
   );
-
 };
 
 export default Popup;
