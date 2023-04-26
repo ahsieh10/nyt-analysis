@@ -2,6 +2,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import AboutPopup from "../pages/analyze/AboutPopup";
 import "./Navbar.scss";
 
 interface NavbarProps {
@@ -17,6 +18,7 @@ const Navbar = ({ initialInput, submitInput }: NavbarProps) => {
       <Link to="/" className="logo">
         <span className="main-blue">NYT</span> Sentiment Analysis
       </Link>
+      <AboutPopup />
       <div className="input-area">
         <div className="input-box">
           <FontAwesomeIcon icon={faSearch} />
