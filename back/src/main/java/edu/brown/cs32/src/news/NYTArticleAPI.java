@@ -2,6 +2,7 @@ package edu.brown.cs32.src.news;
 
 import com.squareup.moshi.Types;
 import edu.brown.cs32.src.interfaces.ArticleSource;
+import edu.brown.cs32.src.news.jsonclasses.Article;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -31,15 +32,59 @@ public class NYTArticleAPI implements ArticleSource {
       results.put("error_message", "IOException generated when making NYT API request.");
       return results;
     }
-
-    return articles;
+    if(articles.get("response").equals("OK") && ((Map<String, Object>)articles.get("response")).get("docs") != null){
+      List<Article> simplified = simplifyArticle((List<Map<String, Object>>) ((Map<String, Object>)articles.get("response")).get("docs"));
+      results.put("status", "success");
+      results.put("data", simplified);
+      return results;
+    }
+    else{
+      results.put("status", "error_bad_request");
+      results.put("error_message", "NYT API did not return a list of articles.");
+      return results;
+    }
   }
 
-  public List<String> filterAbstracts(List<Map<String, Object>> articles){
-    List<String> abstracts = new ArrayList<String>();
+  public static List<String> filterParagraphs(List<Article> articles){
+    List<String> paragraphs = new ArrayList<String>();
     for(int i = 0; i < articles.size(); i++){
-      abstracts.add((String) articles.get(i).get("abstract"));
+      paragraphs.add(articles.get(i).getLeadParagraph());
     }
-    return abstracts;
+    return paragraphs;
+  }
+
+  public static List<String> getKeywords(List<Map<String, Object>> keywords){
+    List<String> results = new ArrayList<String>();
+    for(int i = 0; i < keywords.size(); i++){
+      if(keywords.get(i).get("value") != null){
+        results.add((String)keywords.get(i).get("value"));
+      }
+    }
+    return results;
+  }
+
+  public static String getHeadline(Map<String, Object> headline){
+    return (String)headline.get("main");
+  }
+
+  private static List<Article> simplifyArticle(List<Map<String, Object>> rawArticles){
+    List<Article> finalResults = new ArrayList();
+    for(int i = 0; i < rawArticles.size(); i++){
+      Map<String, Object> resultMap = new HashMap<String, Object>();
+      String[] keys = new String[]{"abstract", "web_url", "snippet", "lead_paragraph", "pub_date", "word_count", "keywords", "headline"};
+      for(String key : keys){
+        if(key.equals("keywords")){
+          resultMap.put("keywords", NYTArticleAPI.getKeywords((List<Map<String, Object>>)rawArticles.get(i).get("keywords")));
+        }
+        else if(key.equals("headline")){
+          resultMap.put("headline", NYTArticleAPI.getHeadline((Map<String, Object>)rawArticles.get(i).get("headline")));
+        }
+        else{
+          resultMap.put(key, rawArticles.get(i).get(key));
+        }
+      }
+      finalResults.add(new Article(resultMap));
+    }
+    return finalResults;
   }
 }

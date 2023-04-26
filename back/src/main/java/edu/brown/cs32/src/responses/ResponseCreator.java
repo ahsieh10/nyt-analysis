@@ -2,10 +2,19 @@ package edu.brown.cs32.src.responses;
 
 import com.squareup.moshi.Moshi;
 import com.squareup.moshi.Types;
+import edu.brown.cs32.src.news.jsonclasses.Article;
+import edu.brown.cs32.src.sentiment.Score;
+import edu.brown.cs32.src.sentiment.jsonclasses.SentimentJson;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import edu.brown.cs32.src.news.NYTArticleAPI;
+import com.squareup.moshi.JsonAdapter;
+import com.squareup.moshi.Moshi;
+import com.squareup.moshi.Types;
 
 /**
  * This class will make the maps for success and failure responses
@@ -23,6 +32,15 @@ public class ResponseCreator {
   }
 
   //TODO: make maps for success / error responses (left some old code below for reference)
+
+  public static String handleSuccess(List<Article> articles, String sentiment, List<Score> biased){
+    Map<String, Object> results = new HashMap<String, Object>();
+    Moshi moshi = new Moshi.Builder().build();
+    JsonAdapter serializer = moshi.adapter(Map.class);
+    results.put("result", "success");
+    results.put("data", new SentimentResponse(articles, sentiment, biased));
+    return serializer.toJson(results);
+  }
 //  /**
 //   * Returns json in case of filtering/searching an empty intial geoJson data.
 //   * @return Object json
