@@ -21,34 +21,10 @@ $grey: #000000;
     align-items: center;
     gap: 18px;
 
-    .about-btn {
-      cursor: pointer;
-      width: 40px;
-      height: 40px;
-      border-color: #f9f9f9;
-      border-width: 2px;
-      border-radius: 50%;
-      background-color: #ffffff;
-
-      .button-content {
-        text-align: center;
-
-        font-family: 'Playfair Display';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 14px;
-        color: #b8b8b8;
-        }
-
-      &:hover {
-        background-color: #8d8d8d;
-      }
-    }
-
     .input-box {
       display: flex;
       align-items: center;
-      color: $grey;
+      color: colors.$headingGrey;
       font-size: 1rem;
       background-color: #f4f4f4;
       padding: 0 1rem;
@@ -59,6 +35,45 @@ $grey: #000000;
         outline: none;
         padding: 10px;
         background-color: #ffffff00;
+      }
+    }
+
+    .about-btn {
+      cursor: pointer;
+      width: 35px;
+      height: 35px;
+      border-color: #f9f9f9;
+      border-width: 2px;
+      border-radius: 50%;
+      background-color: #ffffff;
+      transition: all 0.1s ease-in-out;
+
+      .button-content {
+        text-align: center;
+        font-family: "Playfair Display";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        color: #b8b8b8;
+      }
+
+      &:hover {
+        background-color: #8d8d8d;
+      }
+    }
+
+    .search-btn {
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background-color: colors.$mainBlue;
+      transition: all 0.2s ease-in-out;
+      color: #ffffff;
+
+      &:hover {
+        background-color: #000000;
       }
     }
   }

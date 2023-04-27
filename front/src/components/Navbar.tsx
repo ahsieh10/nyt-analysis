@@ -1,8 +1,7 @@
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import AboutPopup from "../pages/analyze/AboutPopup";
 import "./Navbar.scss";
 
 interface NavbarProps {
@@ -12,7 +11,11 @@ interface NavbarProps {
 }
 
 const Navbar = ({ initialInput, submitInput, togglePopup }: NavbarProps) => {
-  const [input, setInput] = useState(initialInput);
+  const [input, setInput] = useState("");
+
+  useEffect(() => {
+    setInput(initialInput);
+  }, [initialInput]);
 
   return (
     <nav className="navbar">

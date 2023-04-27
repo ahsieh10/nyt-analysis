@@ -10,8 +10,11 @@
   }
 
   .sentiment-label {
-    font-weight: bold;
     color: colors.$mainBlue;
     text-transform: uppercase;
+    font-family: "Source Sans Pro", sans-serif;
+    letter-spacing: 1px;
+    font-size: 1rem;
+    font-weight: 500;
   }
 }
