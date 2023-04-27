@@ -1,22 +1,11 @@
 package edu.brown.cs32.src;
 
-import static edu.brown.cs32.src.news.NYTArticleAPI.filterParagraphs;
-import static edu.brown.cs32.src.responses.utils.JSONConverter.objectsMapToJson;
-import static edu.brown.cs32.src.responses.ResponseCreator.handleSuccess;
-
-import edu.brown.cs32.src.responses.NYTArticleCache;
-import edu.brown.cs32.src.news.jsonclasses.Article;
 import edu.brown.cs32.src.responses.ResponseCache;
 import edu.brown.cs32.src.responses.ResponseCreator;
-import edu.brown.cs32.src.sentiment.MCSentimentAPI;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
 import spark.QueryParamsMap;
 import spark.Request;
 import spark.Response;
 import spark.Route;
-import java.util.Map;
 
 /**
  * This class handles search queries and feed them into the API pipeline to return

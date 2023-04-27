@@ -5,7 +5,6 @@ import static spark.Spark.after;
 
 import edu.brown.cs32.src.news.NYTArticleAPI;
 import edu.brown.cs32.src.responses.ManualResponse;
-import edu.brown.cs32.src.responses.NYTArticleCache;
 import edu.brown.cs32.src.responses.ResponseCache;
 import edu.brown.cs32.src.sentiment.MCSentimentAPI;
 import spark.Spark;
