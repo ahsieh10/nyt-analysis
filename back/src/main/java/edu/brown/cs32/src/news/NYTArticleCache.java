@@ -29,7 +29,6 @@ public class NYTArticleCache implements ArticleSource {
    * @param time Number of seconds before cache entry is considered to be expired.
    * @param size Maximum number of entries in cache before entries are evicted.
    * @param request Manual version of API request (what to call when entry is not in cache)
-   * @param distance Distance as which to consider two points equal
    */
   public NYTArticleCache(int time, int size, NYTArticleAPI request) {
     this.naive = request;

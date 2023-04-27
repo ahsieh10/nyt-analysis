@@ -67,4 +67,5 @@ public class SearchHandler implements Route {
       return objectsMapToJson(articleResponse);
     }
   }
+
 }

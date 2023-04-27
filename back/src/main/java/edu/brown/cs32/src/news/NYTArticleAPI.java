@@ -32,7 +32,7 @@ public class NYTArticleAPI implements ArticleSource {
       results.put("error_message", "IOException generated when making NYT API request.");
       return results;
     }
-    if(articles.get("response").equals("OK") && ((Map<String, Object>)articles.get("response")).get("docs") != null){
+    if(articles.get("status").equals("OK") && ((Map<String, Object>)articles.get("response")).get("docs") != null){
       List<Article> simplified = simplifyArticle((List<Map<String, Object>>) ((Map<String, Object>)articles.get("response")).get("docs"));
       results.put("status", "success");
       results.put("data", simplified);
@@ -74,13 +74,17 @@ public class NYTArticleAPI implements ArticleSource {
       String[] keys = new String[]{"abstract", "web_url", "snippet", "lead_paragraph", "pub_date", "word_count", "keywords", "headline"};
       for(String key : keys){
         if(key.equals("keywords")){
-          resultMap.put("keywords", NYTArticleAPI.getKeywords((List<Map<String, Object>>)rawArticles.get(i).get("keywords")));
+          resultMap.put("keywords", getKeywords((List<Map<String, Object>>)rawArticles.get(i).get("keywords")));
         }
         else if(key.equals("headline")){
-          resultMap.put("headline", NYTArticleAPI.getHeadline((Map<String, Object>)rawArticles.get(i).get("headline")));
+          String mainHeadline = getHeadline((Map<String, Object>)rawArticles.get(i).get("headline"));
+          resultMap.put("headline", mainHeadline);
+        }
+        else if(key.equals("word_count")){
+          resultMap.put("word_count", ((Double)rawArticles.get(i).get("word_count")).intValue());
         }
         else{
-          resultMap.put(key, rawArticles.get(i).get(key));
+          resultMap.put(key, (String)rawArticles.get(i).get(key));
         }
       }
       finalResults.add(new Article(resultMap));
