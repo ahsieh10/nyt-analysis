@@ -53,7 +53,7 @@ public class SearchHandler implements Route {
       String sentiment;
       try{
         sentiment = sentimentLoader.getSentiment(filterParagraphs((List<Article>)articleResponse.get("data")));
-        List<Score> biased = sentimentLoader.getRankedSentences();
+        List<String> biased = sentimentLoader.getRankedSentences();
         return handleSuccess((List<Article>)articleResponse.get("data"), sentiment, biased);
       }
       catch(IOException e){

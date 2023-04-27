@@ -33,7 +33,7 @@ public class ResponseCreator {
 
   //TODO: make maps for success / error responses (left some old code below for reference)
 
-  public static String handleSuccess(List<Article> articles, String sentiment, List<Score> biased){
+  public static String handleSuccess(List<Article> articles, String sentiment, List<String> biased){
     Map<String, Object> results = new HashMap<String, Object>();
     Moshi moshi = new Moshi.Builder().build();
     JsonAdapter serializer = moshi.adapter(Map.class);
