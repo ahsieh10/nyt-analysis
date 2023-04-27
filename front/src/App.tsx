@@ -1,10 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/home/Home";
 import Analyze from "./pages/analyze/Analyze";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./App.scss";
 
 function App() {
+  const [popup, setPopup] = useState(false);
+
+    const togglePopup = () => {
+      setPopup(!popup);
+    };
+
   useEffect(() => {
     const fetchData = async () => {
       const url =
@@ -25,7 +31,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />}></Route>
+          <Route path="/" element={<Home/>}></Route>
           <Route path="/analyze" element={<Analyze />}></Route>
         </Routes>
       </BrowserRouter>
