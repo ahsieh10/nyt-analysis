@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import edu.brown.cs32.mocks.MockSentimentJson;
-import edu.brown.cs32.src.responses.JSONConverter;
+import edu.brown.cs32.src.responses.utils.JSONConverter;
 import edu.brown.cs32.src.sentiment.MCSentimentAPI;
 import edu.brown.cs32.src.sentiment.Score;
 import edu.brown.cs32.src.sentiment.jsonclasses.SentimentJson;

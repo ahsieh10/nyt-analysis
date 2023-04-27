@@ -2,7 +2,7 @@ package edu.brown.cs32.src.sentiment;
 
 import edu.brown.cs32.src.interfaces.SentimentQuery;
 import edu.brown.cs32.src.privatekey.Keys;
-import edu.brown.cs32.src.responses.JSONConverter;
+import edu.brown.cs32.src.responses.utils.JSONConverter;
 import edu.brown.cs32.src.sentiment.jsonclasses.Sentence;
 import edu.brown.cs32.src.sentiment.jsonclasses.Segment;
 import edu.brown.cs32.src.sentiment.jsonclasses.SentimentJson;

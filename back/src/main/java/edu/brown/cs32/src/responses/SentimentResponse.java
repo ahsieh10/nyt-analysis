@@ -7,9 +7,9 @@ import java.util.List;
 public class SentimentResponse {
   private List<Article> articles;
   private String sentiment;
-  private List<Score> biased;
+  private List<String> biased;
 
-  public SentimentResponse(List<Article> articles, String sentiment, List<Score> biased){
+  public SentimentResponse(List<Article> articles, String sentiment, List<String> biased){
     this.articles = articles;
     this.sentiment = sentiment;
     this.biased = biased;

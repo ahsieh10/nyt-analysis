@@ -1,10 +1,10 @@
-package edu.brown.cs32.src.news;
+package edu.brown.cs32.src.responses;
 
 import edu.brown.cs32.src.interfaces.ArticleSource;
+import edu.brown.cs32.src.news.NYTArticleAPI;
 import java.util.Map;
 import com.google.common.cache.*;
 import java.io.IOException;
-import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
 

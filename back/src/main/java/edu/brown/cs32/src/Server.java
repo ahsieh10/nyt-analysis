@@ -4,7 +4,10 @@ import static spark.Spark.after;
 
 
 import edu.brown.cs32.src.news.NYTArticleAPI;
-import edu.brown.cs32.src.news.NYTArticleCache;
+import edu.brown.cs32.src.responses.ManualResponse;
+import edu.brown.cs32.src.responses.NYTArticleCache;
+import edu.brown.cs32.src.responses.ResponseCache;
+import edu.brown.cs32.src.sentiment.MCSentimentAPI;
 import spark.Spark;
 
 /**
@@ -36,7 +39,10 @@ public class Server {
       response.header("Access-Control-Allow-Methods", "*");
     });
 
-    NYTArticleCache query = new NYTArticleCache(1000, 10, new NYTArticleAPI());
+    NYTArticleAPI nyt = new NYTArticleAPI();
+    MCSentimentAPI sentiment = new MCSentimentAPI();
+
+    ResponseCache query = new ResponseCache(1000, 10, new ManualResponse(nyt, sentiment));
 
     // Setting up the handler for the GET endpoints
     Spark.get("search", new SearchHandler(query));

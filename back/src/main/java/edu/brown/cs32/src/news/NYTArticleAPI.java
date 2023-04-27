@@ -1,13 +1,12 @@
 package edu.brown.cs32.src.news;
 
-import com.squareup.moshi.Types;
 import edu.brown.cs32.src.interfaces.ArticleSource;
 import edu.brown.cs32.src.news.jsonclasses.Article;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
-import edu.brown.cs32.src.responses.RequestUtil;
+import edu.brown.cs32.src.responses.utils.RequestUtil;
 import java.util.Map;
 import edu.brown.cs32.src.privatekey.Keys;
 

@@ -1,4 +1,4 @@
-package edu.brown.cs32.src.responses;
+package edu.brown.cs32.src.responses.utils;
 
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
