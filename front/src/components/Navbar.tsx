@@ -19,10 +19,12 @@ const Navbar = ({ initialInput, submitInput, togglePopup }: NavbarProps) => {
       <Link to="/" className="logo">
         <span className="main-blue">NYT</span> Sentiment Analysis
       </Link>
-      <button onClick={togglePopup} className="open-btn">
-        About
-      </button>
       <div className="input-area">
+        <button className="about-btn" onClick={togglePopup}>
+          <div className="button-content">
+            <h2>i</h2>
+          </div>
+        </button>
         <div className="input-box">
           <FontAwesomeIcon icon={faSearch} />
           <input

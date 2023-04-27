@@ -4,6 +4,7 @@ import { createSearchParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { animationDuration } from "../../constants/constants";
+import Popup from "../analyze/AboutPopup";
 import "./Home.scss";
 
 const Home = () => {
@@ -11,6 +12,11 @@ const Home = () => {
   const [input, setInput] = useState("");
   const [imgLoaded, setImgLoaded] = useState(false);
   const [isEntering, setIsEntering] = useState(true);
+  const [popup, setPopup] = useState(false);
+
+  const togglePopup = () => {
+    setPopup(!popup);
+  };
 
   const goToAnalyze = () => {
     setIsEntering(false);
@@ -58,6 +64,11 @@ const Home = () => {
             </button>
           </div>
         </div>
+        <button className="about-btn-home" onClick={togglePopup}>
+          <div className="button-content-home">
+            <h2>i</h2>
+          </div>
+        </button>
       </motion.div>
       <motion.div
         initial={{ x: 300, opacity: 0 }}
@@ -78,6 +89,7 @@ const Home = () => {
           src="./assets/images/landing-img.jpg"
         />
       </motion.div>
+      <Popup popupActive={popup} togglePopup={togglePopup} />
     </div>
   );
 };
