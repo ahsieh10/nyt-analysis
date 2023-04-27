@@ -98,13 +98,18 @@ public class MCSentimentAPI implements SentimentQuery {
    * @return
    * @throws IllegalStateException
    */
-   public List<Score> getRankedSentences() throws IllegalStateException {
+   public List<String> getRankedSentences() throws IllegalStateException {
 //    return this.orderSentenceScores(this.assignSentenceScores());
      if (this.sentimentData == null) {
        //TODO: throw error?
        throw new IllegalStateException("Must get sentiment before ranking sentences.");
      } else {
-       return this.calculateScores(this.sentimentData);
+       List<Score> scores = this.calculateScores(this.sentimentData);
+       List<String> sentences = new ArrayList<>();
+       for (Score score : scores) {
+         sentences.add(score.getText());
+       }
+       return sentences;
      }
    }
 
