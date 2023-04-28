@@ -6,6 +6,10 @@ import { motion } from "framer-motion";
 import { animationDuration } from "../../constants/constants";
 import Popup from "../analyze/AboutPopup";
 import "./Home.scss";
+export const TEXT_home_page_accessible_name = "Home page of The New York Times Sentiment Analysis App.";
+export const TEXT_input_box_accessible_name = "This is the input box. Search for a topic to find a summary of the sentiment analysis for that query.";
+export const TEXT_search_button_accessible_name = "This is the submitt button. Click it to get your results.";
+export const TEXT_about_button_accessible_name = "Here is the about button. Click it to learn more about the app and how it works.";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -31,7 +35,11 @@ const Home = () => {
   };
 
   return (
-    <div className="home">
+    <div
+      className="home"
+      aria-label={TEXT_home_page_accessible_name}
+      role="home-page"
+    >
       <motion.div
         className="home-text-wrapper"
         initial={{ x: -300, opacity: 0 }}
@@ -49,7 +57,11 @@ const Home = () => {
           <h1>
             <span className="main-blue">NYT</span> Sentiment Analysis
           </h1>
-          <div className="input-box">
+          <div
+            className="input-box"
+            aria-label={TEXT_input_box_accessible_name}
+            role="home-input-box"
+          >
             <input
               type="text"
               value={input}
@@ -59,12 +71,22 @@ const Home = () => {
                 if (e.key === "Enter") goToAnalyze();
               }}
             />
-            <button className="search-btn" onClick={goToAnalyze}>
+            <button
+              className="search-btn"
+              aria-label={TEXT_search_button_accessible_name}
+              role="search-button"
+              onClick={goToAnalyze}
+            >
               <FontAwesomeIcon icon={faSearch} />
             </button>
           </div>
         </div>
-        <button className="about-btn-home" onClick={togglePopup}>
+        <button
+          className="about-btn-home"
+          aria-label={TEXT_about_button_accessible_name}
+          role="about-button"
+          onClick={togglePopup}
+        >
           <div className="button-content-home">
             <h2>i</h2>
           </div>
