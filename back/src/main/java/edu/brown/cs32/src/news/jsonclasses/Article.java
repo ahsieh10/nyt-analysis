@@ -19,6 +19,7 @@ public class Article {
     this.snippet = (String) articleMap.get("snippet");
     this.leadParagraph = (String) articleMap.get("lead_paragraph");
     this.wordCount = (Integer) articleMap.get("word_count");
+    this.keywords = (List<String>) articleMap.get("keywords");
     this.headline = (String) articleMap.get("headline");
   }
 
