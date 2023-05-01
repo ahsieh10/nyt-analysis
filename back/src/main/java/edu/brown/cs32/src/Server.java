@@ -4,6 +4,7 @@ import static spark.Spark.after;
 
 
 import edu.brown.cs32.src.news.NYTArticleAPI;
+import edu.brown.cs32.src.news.NYTRequest;
 import edu.brown.cs32.src.responses.ManualResponse;
 import edu.brown.cs32.src.responses.ResponseCache;
 import edu.brown.cs32.src.sentiment.MCSentimentAPI;
@@ -38,7 +39,7 @@ public class Server {
       response.header("Access-Control-Allow-Methods", "*");
     });
 
-    NYTArticleAPI nyt = new NYTArticleAPI();
+    NYTArticleAPI nyt = new NYTArticleAPI(new NYTRequest());
     MCSentimentAPI sentiment = new MCSentimentAPI();
 
     ResponseCache query = new ResponseCache(1000, 10, new ManualResponse(nyt, sentiment));

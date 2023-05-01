@@ -12,13 +12,9 @@ import java.util.concurrent.TimeUnit;
 
 public class ResponseCache implements CombinedResponse {
   /**
-   * Storing cache and distance as private fields (distance = how close two coordinates can be to
-   * return the same value)
+   * Cache that stores keywords to their json responses of articles + sentiment
    */
   private LoadingCache<String, String> cache;
-
-  private double distance;
-
   private ManualResponse naive;
 
   /**
@@ -53,11 +49,7 @@ public class ResponseCache implements CombinedResponse {
    * return from the cache. If not, manually fetch the value from the API and store it in the cache.
    *
    * @param keyword Key containing coordinates to query for in the API
-   * @return Returns results of Weather API call (should have a length of 2 with "temperature" and
-   *     "unit" as keys
-   * @throws IOException thrown by ManualRequest (handled by Guava cache built ins)
-   * @throws ArrayIndexOutOfBoundsException thrown by ManualRequest (handled by Guava cache built
-   *     ins)
+   * @return Returns results of article query + sentiment query as a json string
    */
   @Override
   public String getResponse(String keyword){

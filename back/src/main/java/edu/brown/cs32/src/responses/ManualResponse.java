@@ -18,10 +18,23 @@ public class ManualResponse implements CombinedResponse {
   private NYTArticleAPI nytQuery;
   private MCSentimentAPI sentimentLoader;
 
+  /**
+   * Constructor
+   * @param nytQuery either real or mocked NYT API call
+   * @param sentimentLoader either real or mocked sentiment API call
+   */
   public ManualResponse(NYTArticleAPI nytQuery, MCSentimentAPI sentimentLoader){
     this.nytQuery = nytQuery;
     this.sentimentLoader = sentimentLoader;
   }
+
+  /**
+   * Makes a call to the NYT API and retrieves the articles, filters out the lead paragraphs and feeds them
+   * into the MCSentimentAPI. The overall sentiment and most biased sentences are retrieved, and the results are serialized into
+   * a json string and returned.
+   * @param keyword keyword fed by user
+   * @return list of articles + sentiment + most biased sentences
+   */
   @Override
   public String getResponse(String keyword){
 
@@ -36,7 +49,7 @@ public class ManualResponse implements CombinedResponse {
       catch(IOException e){
         Map<String, Object> finalResponse = new HashMap<String, Object>();
         finalResponse.put("status", "error_bad_request");
-        finalResponse.put("error_message", "Received IOException in sentiment retrieval");
+        finalResponse.put("error_message", "Received IOException in sentiment retrieval. Check your inputted keyword.");
         return objectsMapToJson(finalResponse);
       }
     }

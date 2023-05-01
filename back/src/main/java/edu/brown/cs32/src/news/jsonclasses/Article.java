@@ -13,6 +13,10 @@ public class Article {
   private List<String> keywords;
   private String headline;
 
+  /**
+   * Constructor for making an Article object out of a map.
+   * @param articleMap map version of an article
+   */
   public Article(Map<String, Object> articleMap){
     this.newsAbstract = (String) articleMap.get("abstract");
     this.webUrl = (String) articleMap.get("web_url");
@@ -26,4 +30,14 @@ public class Article {
   public String getLeadParagraph(){
     return this.leadParagraph;
   }
+  public String getAbstract(){
+    return this.newsAbstract;
+  }
+  public String getUrl(){
+    return this.webUrl;
+  }
+  public String getSnippet(){ return this.snippet;}
+  public Integer wordCount(){ return this.wordCount;}
+  public List<String> getKeywords(){ return this.keywords;}
+  public String getHeadline(){return this.headline;}
 }

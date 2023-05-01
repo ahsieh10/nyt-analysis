@@ -15,10 +15,20 @@ public class SearchHandler implements Route {
 
   ResponseCache cache;
 
+  /**
+   * Constructor for search handler
+   * @param cache cache that stores articles + their sentiment responses
+   */
   public SearchHandler(ResponseCache cache){
     this.cache = cache;
   }
 
+  /**
+   * Returns the articles + sentiment response to the front end
+   * @param request API request made
+   * @param response (not used)
+   * @return json string with articles + sentiment response and status of response
+   */
   @Override
   public Object handle(Request request, Response response) {
 

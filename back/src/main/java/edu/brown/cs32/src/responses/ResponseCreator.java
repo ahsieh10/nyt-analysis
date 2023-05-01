@@ -26,6 +26,13 @@ public class ResponseCreator {
 
   //TODO: make maps for success / error responses (left some old code below for reference)
 
+  /**
+   * Handles logic for returning a success response.
+   * @param articles list of articles retrieved from the NYT API
+   * @param sentiment overall sentiment detected from the articles
+   * @param biased list of most biased sentences in the lead paragraphs
+   * @return json string of combined results
+   */
   public static String handleSuccess(List<Article> articles, String sentiment, List<String> biased){
     Map<String, Object> results = new HashMap<String, Object>();
     Moshi moshi = new Moshi.Builder().build();

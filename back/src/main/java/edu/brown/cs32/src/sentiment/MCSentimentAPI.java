@@ -37,6 +37,10 @@ public class MCSentimentAPI implements SentimentQuery {
   public String getSentiment(List<String> articles) throws IOException {
     String url = this.getURL(articles);
     String json = this.makeRequest(url);
+    Map<String, Object> temp = JSONConverter.fromJson(json, Map.class);
+    if(temp.get("agreement") == null){
+      throw new IOException();
+    }
     this.sentimentData = JSONConverter.fromJson(json, SentimentJson.class);
     return this.sentimentData.score_tag;
   }

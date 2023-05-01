@@ -9,6 +9,12 @@ public class SentimentResponse {
   private String sentiment;
   private List<String> biased;
 
+  /**
+   * Constructor for sentiment response
+   * @param articles articles fed into sentiment API
+   * @param sentiment sentiment response
+   * @param biased most biased sentences ranked
+   */
   public SentimentResponse(List<Article> articles, String sentiment, List<String> biased){
     this.articles = articles;
     this.sentiment = sentiment;

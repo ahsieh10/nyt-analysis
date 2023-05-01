@@ -4,14 +4,13 @@ import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 import com.squareup.moshi.Types;
 import java.io.IOException;
-import java.lang.reflect.ParameterizedType;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
 import okio.Buffer;
 
 /** Utility for requesting URL. */
-public class RequestUtil {
+public class RequestUtil{
   /**
    * Requests a URL and deserializes it into a given class.
    *
