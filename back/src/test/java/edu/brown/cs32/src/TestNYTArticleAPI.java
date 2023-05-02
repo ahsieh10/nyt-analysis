@@ -37,6 +37,9 @@ public class TestNYTArticleAPI {
         "China",
         "Xi Jinping",
     }));
+    assertEquals(articles.get(0).getHeadline(), "China Is Cracking Down on Bankers. Here Are Some of the Targets.");
+    assertEquals(articles.get(0).getThumbnail(), "images/2023/04/25/multimedia/00China-Finance-Crackdown-01-bvhw/00China-Finance-Crackdown-01-bvhw-thumbStandard.jpg");
+    assertEquals(articles.get(1).getThumbnail(), "");
   }
 
   @Test

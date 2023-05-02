@@ -12,6 +12,7 @@ public class Article {
   private Integer wordCount;
   private List<String> keywords;
   private String headline;
+  private String thumbnail;
 
   /**
    * Constructor for making an Article object out of a map.
@@ -25,6 +26,7 @@ public class Article {
     this.wordCount = (Integer) articleMap.get("word_count");
     this.keywords = (List<String>) articleMap.get("keywords");
     this.headline = (String) articleMap.get("headline");
+    this.thumbnail = (String) articleMap.get("thumbnail");
   }
 
   public String getLeadParagraph(){
@@ -40,4 +42,5 @@ public class Article {
   public Integer wordCount(){ return this.wordCount;}
   public List<String> getKeywords(){ return this.keywords;}
   public String getHeadline(){return this.headline;}
+  public String getThumbnail(){return this.thumbnail;}
 }

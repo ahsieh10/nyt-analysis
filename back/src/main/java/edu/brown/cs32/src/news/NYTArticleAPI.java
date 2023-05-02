@@ -73,6 +73,17 @@ public class NYTArticleAPI{
     return paragraphs;
   }
 
+  private static String filterThumbnail(List<Map<String, Object>> multimedia){
+    int index = 0;
+    while(index < multimedia.size() && !multimedia.get(index).get("subtype").equals("thumbnail")){
+      index++;
+    }
+    if(index >= multimedia.size()){
+      return "";
+    }
+    return (String) multimedia.get(index).get("url");
+  }
+
   /**
    * Gets the keywords associated with an article (still in map form). Used to create the Article object.
    * @param keywords map object that contains the keywords along with many other parameters
@@ -106,7 +117,7 @@ public class NYTArticleAPI{
     List<Article> finalResults = new ArrayList();
     for(int i = 0; i < rawArticles.size(); i++){
       Map<String, Object> resultMap = new HashMap<String, Object>();
-      String[] keys = new String[]{"abstract", "web_url", "snippet", "lead_paragraph", "pub_date", "word_count", "keywords", "headline"};
+      String[] keys = new String[]{"abstract", "web_url", "snippet", "lead_paragraph", "pub_date", "word_count", "keywords", "headline", "multimedia"};
       for(String key : keys){
         if(key.equals("keywords")){
           resultMap.put("keywords", getKeywords((List<Map<String, Object>>)rawArticles.get(i).get("keywords")));
@@ -117,6 +128,14 @@ public class NYTArticleAPI{
         }
         else if(key.equals("word_count")){
           resultMap.put("word_count", ((Double)rawArticles.get(i).get("word_count")).intValue());
+        }
+        else if(key.equals("multimedia")){
+          if(rawArticles.get(i).get("multimedia") == null){
+            resultMap.put("thumbnail", "");
+          }
+          else{
+            resultMap.put("thumbnail", filterThumbnail((List<Map<String, Object>>) rawArticles.get(i).get("multimedia")));
+          }
         }
         else{
           resultMap.put(key, (String)rawArticles.get(i).get(key));
