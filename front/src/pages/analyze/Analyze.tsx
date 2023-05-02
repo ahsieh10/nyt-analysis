@@ -28,6 +28,7 @@ const Analyze = () => {
       setResult(res);
       setSentiment(res.sentiment);
     } else {
+      setResult(null);
       console.log(res.message);
     }
     setLoading(false);
@@ -64,10 +65,16 @@ const Analyze = () => {
         ) : result ? (
           <div className="main-container">
             <Sidebar result={result} />
-            <Results result={result} query={queryParam} handleSubmit={handleSubmit}/>
+            <Results
+              result={result}
+              query={queryParam}
+              handleSubmit={handleSubmit}
+            />
           </div>
         ) : (
-          <div>No valid query has been submitted.</div>
+          <div>
+            No valid query has been submitted, or the server has errored.
+          </div>
         )}
       </div>
       <Popup popupActive={popup} togglePopup={togglePopup} />
