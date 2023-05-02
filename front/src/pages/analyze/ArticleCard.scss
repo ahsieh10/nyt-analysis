@@ -46,6 +46,18 @@ $cardHeight: 80px;
   }
 }
 
+.placeholder-img {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc($cardHeight - 25px);
+  height: calc($cardHeight - 25px);
+  border-radius: 50%;
+  background-color: #dedede;
+  color: #ffffff;
+}
+
 .active {
   background-color: colors.$mainBlue;
   color: #ffffff;

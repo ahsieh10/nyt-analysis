@@ -5,18 +5,18 @@ import { Link } from "react-router-dom";
 import "./Navbar.scss";
 
 interface NavbarProps {
-  initialInput: string;
+  queryParam: string;
   submitInput: (input: string) => void;
   togglePopup: () => void;
 }
 
-const Navbar = ({ initialInput, submitInput, togglePopup }: NavbarProps) => {
+const Navbar = ({ queryParam, submitInput, togglePopup }: NavbarProps) => {
   const [input, setInput] = useState("");
 
   useEffect(() => {
-    setInput(initialInput);
-  }, [initialInput]);
-
+    setInput(queryParam);
+  }, [queryParam]);
+  
   return (
     <nav className="navbar">
       <Link to="/" className="logo">
@@ -36,6 +36,11 @@ const Navbar = ({ initialInput, submitInput, togglePopup }: NavbarProps) => {
             placeholder="Search..."
             onChange={(e) => {
               setInput(e.target.value);
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                submitInput(input);
+              }
             }}
           />
         </div>

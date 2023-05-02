@@ -1,6 +1,6 @@
 // Article search "japan" from the NYT API
 
-import { Article } from "../interfaces/interfaces";
+import { Article } from "../interfaces/nytApiStructure";
 
 export const mockArticleData: Article[] = [
   {

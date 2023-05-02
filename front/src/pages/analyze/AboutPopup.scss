@@ -1,4 +1,5 @@
-.about-page, .overlay {
+.about-page,
+.overlay {
   width: 100vw;
   height: 100vh;
   top: 0;
@@ -6,8 +7,7 @@
   right: 0;
   bottom: 0;
   position: fixed;
-  z-index: 0;
-
+  z-index: 999;
 }
 
 .overlay {
@@ -16,11 +16,10 @@
 }
 
 .popup-content {
-
   .popup-background {
-    display: flex;
+    // display: flex;
     position: absolute;
-    justify-content: center;
+    // justify-content: center;
     width: 35vw;
     height: 70vh;
     top: 50%;
@@ -31,82 +30,78 @@
     background-color: #ffffff;
 
     .about-app {
-    display: flex;
-    position: fixed;
-    
-    font-size: 24px;
+      display: flex;
+      // position: fixed;
 
-    font-family: 'Playfair Display';
-    font-style: normal;
-    font-weight: 700;
-    color: #3eaeff;
+      font-size: 24px;
+      font-family: "Playfair Display";
+      font-style: normal;
+      font-weight: 700;
+      padding-bottom: 20px;
+      color: #3eaeff;
     }
 
     .about-body {
       display: flex;
       align-items: center;
-      font-family: 'Playfair Display';
+      font-family: "Playfair Display";
       font-weight: lighter;
       font-size: 16px;
       color: #707070;
     }
+  }
 
   .close-btn {
-  cursor: pointer;
-  display: flex;
-  position: fixed;
-  margin-left: 547px;
-  margin-top: -5px;
-  width: 18px;
-  height: 18px;
-  background-color: #ffffff;
-  border-color: #f9f9f9;
-  border-width: 2px;
-  border-radius: 30%;
-  align-items: center;
+    cursor: pointer;
+    display: flex;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 18px;
+    height: 18px;
+    background-color: #ffffff;
+    border-color: #f9f9f9;
+    border-width: 2px;
+    border-radius: 30%;
+    align-items: center;
 
-  .close-button-content {
-    display: flex;    
-    margin-top: -6.5px;
-    margin-left: 1.5px;
-    font-family: 'Playfair Display';
-    font-weight: lighter;
-    font-size: 14px;
-    color: #707070;
-  }
+    .close-button-content {
+      display: flex;
+      margin-top: -6.5px;
+      margin-left: 1.5px;
+      font-family: "Playfair Display";
+      font-weight: lighter;
+      font-size: 14px;
+      color: #707070;
+    }
 
     &:hover {
       background-color: #8d8d8d;
     }
   }
-
-  }
-
 }
-
 
 @media screen and (max-width: 90vw) {
   .popup-content {
     .popup-background {
       .about-app {
-          font-size: 3rem;
+        font-size: 3rem;
       }
-      
+
       .about-body {
         font-size: 2.5rem;
-        }
+      }
 
       .close-btn {
-      flex-direction: column;
-      justify-content: center;
-    }
+        flex-direction: column;
+        justify-content: center;
+      }
     }
   }
 }
 
 @media screen and (max-width: 75vw) {
   .popup-content {
-
     .popup-background {
       flex-direction: column;
 
@@ -115,7 +110,7 @@
       }
 
       .about-body {
-        font-size: 3.0rem;
+        font-size: 3rem;
         text-align: center;
         padding: 0 2 rem;
       }

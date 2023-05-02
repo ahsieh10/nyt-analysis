@@ -1,15 +1,54 @@
 import ResultSection from "./ResultSection";
 import KeywordCloud from "./KeywordCloud";
-import { Result } from "../../../interfaces/interfaces";
 import { motion } from "framer-motion";
-import "./Results.scss";
 import { animationDuration } from "../../../constants/constants";
+import { SuccessDataResult } from "../../../interfaces/interfaces";
+import { useRef, useState, useEffect } from "react";
+import ToggleElement from "./ToggleElement";
+import "./Results.scss";
 
 interface ResultsProps {
-  result: Result;
+  result: SuccessDataResult;
+  query: string;
+  handleSubmit: (input: string) => void;
 }
 
-const Results = ({ result }: ResultsProps) => {
+const toggleItems = ["All", "Sentiment", "Biased Sentences", "Keywords"];
+
+const Results = ({ result, query, handleSubmit }: ResultsProps) => {
+  const parentRef = useRef<HTMLDivElement>(null);
+  const [activeToggle, setActiveToggle] = useState("All");
+  const [indicatorStyle, setIndicatorStyle] = useState({
+    x: 0,
+    width: 0,
+  });
+
+  const moveIndicator = (box: DOMRect) => {
+    if (!parentRef.current) return;
+    const left = box.left - parentRef.current.getBoundingClientRect().left;
+    const width = box.width;
+    setIndicatorStyle({ x: left, width });
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") {
+        const nextIndex =
+          toggleItems.indexOf(activeToggle) === 0
+            ? toggleItems.length - 1
+            : (toggleItems.indexOf(activeToggle) - 1) % toggleItems.length;
+        setActiveToggle(toggleItems[nextIndex]);
+      } else if (e.key === "ArrowRight") {
+        const nextIndex =
+          (toggleItems.indexOf(activeToggle) + 1) % toggleItems.length;
+        setActiveToggle(toggleItems[nextIndex]);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [activeToggle]);
+
   return (
     <motion.div
       className="results"
@@ -17,31 +56,62 @@ const Results = ({ result }: ResultsProps) => {
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: animationDuration, ease: "easeInOut" }}
     >
-      <h2>Results for "{`${result.query}`}"</h2>
-      <ResultSection
-        title="Overall Sentiment"
-        horizontal
-        innerContent={
-          <div className="sentiment-label">{result.overallSentiment}</div>
-        }
-      />
-      <ResultSection
-        title="Most biased sentences"
-        innerContent={
-          <div>
-            {result.mostBiasedSentences.map((sentence) => (
-              <>
-                <div>{sentence}</div>
-                <br />
-              </>
-            ))}
-          </div>
-        }
-      />
-      <ResultSection
-        title="Keywords"
-        innerContent={<KeywordCloud words={result.keywords} />}
-      />
+      <h2>Results for "{`${query}`}"</h2>
+      <div className="sort-toggles" ref={parentRef}>
+        {toggleItems.map((item) => (
+          <ToggleElement
+            key={item}
+            label={item}
+            active={activeToggle === item}
+            setActive={setActiveToggle}
+            moveIndicator={moveIndicator}
+          />
+        ))}
+        <motion.div
+          className="toggle-indicator light-blue-background"
+          initial={{ x: 0, width: 0 }}
+          animate={indicatorStyle}
+        ></motion.div>
+      </div>
+      {(activeToggle === "All" || activeToggle === "Sentiment") && (
+        <ResultSection
+          title="Overall Sentiment"
+          horizontal
+          innerContent={
+            <div className="sentiment-label">{result.sentiment}</div>
+          }
+        />
+      )}
+      {(activeToggle === "All" || activeToggle === "Biased Sentences") && (
+        <ResultSection
+          title="Most biased sentences"
+          innerContent={
+            <div>
+              {result.biased.map((sentence, i) => (
+                <div key={i}>
+                  <div>{sentence}</div>
+                  <br />
+                </div>
+              ))}
+            </div>
+          }
+        />
+      )}
+      {(activeToggle === "All" || activeToggle === "Keywords") && (
+        <ResultSection
+          title="Keywords"
+          innerContent={
+            <KeywordCloud
+              handleSubmit={handleSubmit}
+              words={Array.from(
+                new Set(
+                  result.articles.map((article) => article.keywords).flat()
+                )
+              ).slice(0, 25)}
+            />
+          }
+        />
+      )}
     </motion.div>
   );
 };
