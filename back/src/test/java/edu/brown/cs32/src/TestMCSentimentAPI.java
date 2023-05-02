@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import edu.brown.cs32.mocks.MockSentimentJson;
+import edu.brown.cs32.src.interfaces.MCInter;
 import edu.brown.cs32.src.responses.utils.JSONConverter;
+import edu.brown.cs32.src.sentiment.MCRequest;
 import edu.brown.cs32.src.sentiment.MCSentimentAPI;
 import edu.brown.cs32.src.sentiment.Score;
 import edu.brown.cs32.src.sentiment.jsonclasses.SentimentJson;
@@ -32,15 +34,15 @@ public class TestMCSentimentAPI {
   @Test
   public void testGetURL() {
     List<String> articles = new ArrayList<>();
-    articles.add("sentence number 1 ends here.");
-    articles.add("sentence two with / symbol and = symbol and question ? symbol.");
-    articles.add("sentence 3 with   weird       spaces. ] [ \" \\ +$#@!~%^&*()_+;><");
-    MCSentimentAPI tester = new MCSentimentAPI();
+    articles.add("sentence number 1 “ ” ends here.");
+    articles.add("sentence two — with / symbol and = symbol and question ? symbol.");
+    articles.add("sentence 3 with   weird       spaces. ] [ \"c \\ +$#@!~%^&*()_+;><");
+    MCRequest tester = new MCRequest();
     String result = tester.getURL(articles);
     String expected = "https://api.meaningcloud.com/sentiment-2.1?"
         + "key=f5cb66634417b2b3b554b1d3359bc1f2&lang=en&txt="
         + "sentence%20number%201%20ends%20here.sentence%20two%20with%20symbol%20and%20symbol%20and%20question%20.symbol."
-        + "sentence%203%20with%20weird%20spaces.%20.%20&model=general";
+        + "sentence%203%20with%20weird%20spaces.%20c%20.%20&model=general";
     assertEquals(expected, result);
 
     List<String> articles2 = new ArrayList<>();
@@ -54,11 +56,18 @@ public class TestMCSentimentAPI {
         + "The%20service%20could%20not%20have%20been%20better!%20But%20they%20were%20rude%20to%20others."
         + "Spent%20too%20much%20money%20for%20food%20that%20made%20me%20hungry.&model=general";
     assertEquals(expected2, result2);
+
+//    String text = "WASHINGTON — Treasury Secretary Janet L. Yellen on Thursday called for a “constructive” and “healthy” economic relationship between the United States and China, one in which the two nations could work together to confront global challenges in spite of their conflicting national security interests.";
+//    text = text.replaceAll("[\\p{Punct}&&[^.?!]]", " ");
+//    text = text.replaceAll("— | “", " ");
+//    text = text.replaceAll("\\? | !", ".");
+//    text = text.replaceAll("”", " ");
+//    System.out.print(text);
   }
 
   @Test
   public void testRanking() throws IOException {
-    MCSentimentAPI tester = new MCSentimentAPI();
+    MCSentimentAPI tester = new MCSentimentAPI(new MCRequest());
     SentimentJson data = JSONConverter.fromJson(MockSentimentJson.bigMockJson, SentimentJson.class);
     List<Score> result = tester.calculateScores(data);
     assertEquals(result.get(0).getText(), "Spent too much money for food that made me hungry but there was a good environment if not for the mediocre view");

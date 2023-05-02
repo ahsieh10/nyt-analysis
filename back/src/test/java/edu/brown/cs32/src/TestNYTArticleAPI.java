@@ -2,14 +2,12 @@ package edu.brown.cs32.src;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.testng.AssertJUnit.assertNull;
 
 import edu.brown.cs32.mocks.NYTMock;
 import edu.brown.cs32.src.news.jsonclasses.Article;
 import edu.brown.cs32.src.news.NYTArticleAPI;
 import java.io.IOException;
 import java.util.List;
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import java.util.Map;
 import java.util.Arrays;

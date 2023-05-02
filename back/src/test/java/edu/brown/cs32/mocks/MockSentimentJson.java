@@ -1,6 +1,32 @@
 package edu.brown.cs32.mocks;
 
 public class MockSentimentJson {
+    public final static String NYTSentence = "WASHINGTON  Treasury Secretary Janet L. Yellen on Thursday called for a constructive  and healthy  economic relationship between the United States and China  one in which the two nations could work together to confront global challenges in spite of their conflicting national security interests.";
+
+    public final static String intMockJson = "{\""
+        + "agreement\":\"AGREEMENT\","
+        + "\"confidence\":\"98\","
+        + "\"irony\":\"NONIRONIC\","
+        + "\"model\":\"general_en\","
+        + "\"score_tag\":\"P\","
+        + "\"sentence_list\":["
+        + "{\"agreement\":"
+        + "\"AGREEMENT\","
+        + "\"bop\":\"y\","
+        + "\"confidence\":\"98\","
+        + "\"endp\":\"18\","
+        + "\"inip\":\"0\","
+        + "\"score_tag\":\"P+\","
+        + "\"segment_list\":["
+        + "{\"agreement\":\"AGREEMENT\","
+        + "\"confidence\":\"98\","
+        + "\"endp\":\"18\","
+        + "\"inip\":\"0\","
+        + "\"polarity_term_list\":[{\"confidence\":\"98\",\"endp\":\"18\",\"inip\":\"15\",\"score_tag\":\"P+\",\"text\":\"constructive and healthy\"}],"
+        + "\"score_tag\":\"P+\",\"segment_type\":\"main\",\"text\":\"constructive and healthy\"}],\"sentimented_concept_list\":[],\"sentimented_entity_list\":[],\"text\":\"" + NYTSentence
+        + "\"}],"
+        + "\"sentimented_concept_list\":[],\"sentimented_entity_list\":[],"
+        + "\"status\":{\"code\":\"0\",\"msg\":\"OK\",\"credits\":\"1\",\"remaining_credits\":\"19984\"},\"subjectivity\":\"SUBJECTIVE\"}";
 
     public final static String smallMockJson = "{\""
         + "agreement\":\"AGREEMENT\","
@@ -21,7 +47,10 @@ public class MockSentimentJson {
         + "\"confidence\":\"98\","
         + "\"endp\":\"18\","
         + "\"inip\":\"0\","
-        + "\"polarity_term_list\":[{\"confidence\":\"98\",\"endp\":\"18\",\"inip\":\"15\",\"score_tag\":\"P+\",\"text\":\"(really) good\"}],\"score_tag\":\"P+\",\"segment_type\":\"main\",\"text\":\"this is really good\"}],\"sentimented_concept_list\":[],\"sentimented_entity_list\":[],\"text\":\"this is really good\"}],\"sentimented_concept_list\":[],\"sentimented_entity_list\":[],\"status\":{\"code\":\"0\",\"msg\":\"OK\",\"credits\":\"1\",\"remaining_credits\":\"19984\"},\"subjectivity\":\"SUBJECTIVE\"}";
+        + "\"polarity_term_list\":[{\"confidence\":\"98\",\"endp\":\"18\",\"inip\":\"15\",\"score_tag\":\"P+\",\"text\":\"(really) good\"}],"
+        + "\"score_tag\":\"P+\",\"segment_type\":\"main\",\"text\":\"this is really good\"}],\"sentimented_concept_list\":[],\"sentimented_entity_list\":[],\"text\":\"this is really good\"}],"
+        + "\"sentimented_concept_list\":[],\"sentimented_entity_list\":[],"
+        + "\"status\":{\"code\":\"0\",\"msg\":\"OK\",\"credits\":\"1\",\"remaining_credits\":\"19984\"},\"subjectivity\":\"SUBJECTIVE\"}";
 
     public final static String medMockJson = "{\"agreement\":\"DISAGREEMENT\","
         + "\"confidence\":\"86\","
@@ -54,4 +83,5 @@ public class MockSentimentJson {
         + "\"segment_list\":["
         + "{\"polarity_term_list\":[{\"text\":\"too much money\"}]},"
         + "{\"polarity_term_list\":[{\"text\":\"good environment\"}, {\"text\":\"mediocre\"}]}]}]}";
+
 }

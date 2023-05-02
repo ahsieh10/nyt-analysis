@@ -7,6 +7,7 @@ import edu.brown.cs32.src.news.NYTArticleAPI;
 import edu.brown.cs32.src.news.NYTRequest;
 import edu.brown.cs32.src.responses.ManualResponse;
 import edu.brown.cs32.src.responses.ResponseCache;
+import edu.brown.cs32.src.sentiment.MCRequest;
 import edu.brown.cs32.src.sentiment.MCSentimentAPI;
 import spark.Spark;
 
@@ -40,7 +41,7 @@ public class Server {
     });
 
     NYTArticleAPI nyt = new NYTArticleAPI(new NYTRequest());
-    MCSentimentAPI sentiment = new MCSentimentAPI();
+    MCSentimentAPI sentiment = new MCSentimentAPI(new MCRequest());
 
     ResponseCache query = new ResponseCache(1000, 10, new ManualResponse(nyt, sentiment));
 
