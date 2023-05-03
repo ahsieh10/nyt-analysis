@@ -18,11 +18,22 @@ public class MCSentimentAPI {
   private Map<String, Double> scoreMap;
   private MCInter requester;
 
+  /**
+   * Constructor for MCSentimentAPI. Takes in a requester that should be able to make a request for
+   * a sentiment json. Assigns initial score map based on score tags.
+   * @param requester
+   */
   public MCSentimentAPI(MCInter requester) {
     this.requester = requester;
     this.makeScoreMap();
   }
 
+  /**
+   * Given a list of articles, return the overall sentiment.
+   * @param articles - the list of articles from NYT
+   * @return - score tag (P, NEU, N, etc.)
+   * @throws IOException
+   */
   public String getSentiment(List<String> articles) throws IOException {
     this.sentimentData = this.requester.apiRequest(articles);
     return this.sentimentData.score_tag;
@@ -31,22 +42,38 @@ public class MCSentimentAPI {
   // Methods below for algorithmic complexity
   /**
    * Method call to get the final list of sentences (and their scores) in order
-   * @return
+   * @return - the list of sentences in order from least to most biased
    * @throws IllegalStateException
    */
    public List<String> getRankedSentences() throws IllegalStateException {
-//    return this.orderSentenceScores(this.assignSentenceScores());
      if (this.sentimentData == null) {
-       //TODO: throw error?
        throw new IllegalStateException("Must get sentiment before ranking sentences.");
      } else {
        List<Score> scores = this.calculateScores(this.sentimentData);
-       List<String> sentences = new ArrayList<>();
-       for (Score score : scores) {
-         sentences.add(score.getText());
-       }
-       return sentences;
+       return this.filterSentences(scores);
      }
+   }
+
+  /**
+   * Filters list of sentences to get rid of incomplete sentences and sentences that don't agree
+   * with overall sentiment.
+   * (Public for testing purposes)
+   * @param scores - the current list of scores
+   * @return - the filtered list of sentences
+   */
+   public List<String> filterSentences(List<Score> scores) {
+     List<String> filtered = new ArrayList<>();
+     for (Score score : scores) {
+       String sentence = score.getText();
+       // exclude incomplete sentences and sentences with opposite sentiment of overall sentiment
+       if (!sentence.endsWith(".") || !Character.isUpperCase(sentence.charAt(0))
+           || Math.signum(score.getScore()) == -1 * Math.signum(this.scoreMap.get(this.sentimentData.score_tag))) {
+         continue;
+       } else {
+         filtered.add(sentence);
+       }
+     }
+     return filtered;
    }
 
 //  /**
@@ -89,7 +116,7 @@ public class MCSentimentAPI {
     for(int i = 0; i <scores.size() - 1; i++) {
       for(int j = 0; j <scores.size() - i - 1; j++) {
 
-        if(scores.get(j).getScore() > scores.get(j + 1).getScore()) {
+        if(this.compare(scores, j)) {
           Score temp = scores.get(j);
           scores.set(j, scores.get(j + 1));
           scores.set(j + 1, temp);
@@ -97,6 +124,20 @@ public class MCSentimentAPI {
       }
     }
     return scores;
+  }
+
+  /**
+   * Helper method that switches sorting order based on the overall sentiment
+   * @param scores - list of scores
+   * @param j - the current iteration
+   * @return true based on comparison result
+   */
+  private boolean compare(List<Score> scores, int j) {
+    if (Math.signum(this.scoreMap.get(this.sentimentData.score_tag)) == -1) {
+      return scores.get(j).getScore() < scores.get(j + 1).getScore();
+    } else {
+      return scores.get(j).getScore() > scores.get(j + 1).getScore();
+    }
   }
 
   /**

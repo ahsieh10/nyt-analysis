@@ -8,9 +8,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SentimentMock implements MCInter {
+public class MCMock implements MCInter {
   private Map<String, String> articleSentiment = new HashMap<>(){{
     put(MockSentimentJson.NYTSentence, MockSentimentJson.smallMockJson);
+    put(MockSentimentJson.NYTText, MockSentimentJson.NYTMockJson);
   }};
 
   @Override

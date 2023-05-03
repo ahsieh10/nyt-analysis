@@ -3,6 +3,7 @@ package edu.brown.cs32.src;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import edu.brown.cs32.mocks.MCMock;
 import edu.brown.cs32.mocks.MockSentimentJson;
 import edu.brown.cs32.src.interfaces.MCInter;
 import edu.brown.cs32.src.responses.utils.JSONConverter;
@@ -15,7 +16,15 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Tests for MCSentiment functions.
+ */
 public class TestMCSentimentAPI {
+
+  /**
+   * Tests that JSONConverter can convert a json from MC into a SentimentJson object
+   * @throws IOException
+   */
   @Test
   public void testJsonConverter() throws IOException {
     SentimentJson test = JSONConverter.fromJson(MockSentimentJson.smallMockJson, SentimentJson.class);
@@ -31,6 +40,30 @@ public class TestMCSentimentAPI {
     assertEquals(test.sentence_list.get(0).segment_list.get(0).polarity_term_list.get(0).text, "(really) good");
   }
 
+  /**
+   * Tests that get sentiment can properly get the score tag from a mocked sentiment json
+   * @throws IOException
+   */
+  @Test
+  public void testGetSentiment() throws IOException {
+    MCSentimentAPI tester = new MCSentimentAPI(new MCMock());
+    List<String> sentences = new ArrayList<>();
+    sentences.add(MockSentimentJson.NYTSentence);
+    String sentiment = tester.getSentiment(sentences);
+    assertEquals("P+", sentiment);
+
+    List<String> sentences2 = new ArrayList<>();
+    sentences2.add("Shirt fits weird.");
+    sentences2.add("My shirt shrunk.");
+    sentences2.add("The shirt costs too much for the quality.");
+    String sentiment2 = tester.getSentiment(sentences2);
+    assertEquals("N", sentiment2);
+
+  }
+
+  /**
+   * Tests that the url for the MC API request is properly formatted (punctuation doesn't break the url)
+   */
   @Test
   public void testGetURL() {
     List<String> articles = new ArrayList<>();
@@ -65,10 +98,18 @@ public class TestMCSentimentAPI {
 //    System.out.print(text);
   }
 
+  /**
+   * Tests that the ranking method properly scores and ranks sentences based on confidence,
+   * number of polarity terms, and individual score tags
+   * @throws IOException
+   */
   @Test
   public void testRanking() throws IOException {
-    MCSentimentAPI tester = new MCSentimentAPI(new MCRequest());
+    MCSentimentAPI tester = new MCSentimentAPI(new MCMock());
     SentimentJson data = JSONConverter.fromJson(MockSentimentJson.bigMockJson, SentimentJson.class);
+    List<String> sentences = new ArrayList<>();
+    sentences.add(MockSentimentJson.NYTSentence);
+    tester.getSentiment(sentences);
     List<Score> result = tester.calculateScores(data);
     assertEquals(result.get(0).getText(), "Spent too much money for food that made me hungry but there was a good environment if not for the mediocre view");
     assertEquals(result.get(0).getScore(), -12.5);
@@ -77,6 +118,44 @@ public class TestMCSentimentAPI {
     assertEquals(result.get(2).getText(), "Wow this could have been so good but I wish there was more to it");
     assertEquals(result.get(2).getScore(), 8);
 
+    SentimentJson data2 = JSONConverter.fromJson(MockSentimentJson.NYTMockJson, SentimentJson.class);
+    List<Score> result2 = tester.calculateScores(data2);
+    List<String> sentences2 = new ArrayList<>();
+    sentences2.add("Shirt fits weird.");
+    sentences2.add("My shirt shrunk.");
+    sentences2.add("The shirt costs too much for the quality.");
+    tester.getSentiment(sentences2);
+    assertEquals(result2.get(0).getText(), "Shirt fits weird.");
+    assertEquals(result2.get(0).getScore(), -7.0);
+    assertEquals(result2.get(1).getText(), "The shirt costs too much for the quality.");
+    assertEquals(result2.get(1).getScore(), -6.0);
+    assertEquals(result2.get(2).getText(), "My shirt shrunk.");
+    assertEquals(result2.get(2).getScore(), 0.0);
+  }
+
+  /**
+   * Tests that the filtering method gets rid of incomplete sentences and sentences with sentiment
+   * scores opposite to the overall sentiment
+   * @throws IOException
+   */
+  @Test
+  public void testFiltering() throws IOException {
+    MCSentimentAPI tester = new MCSentimentAPI(new MCMock());
+    List<String> sentences = new ArrayList<>();
+    sentences.add(MockSentimentJson.NYTSentence);
+    tester.getSentiment(sentences);
+
+    List<Score> data = new ArrayList<>();
+    data.add(new Score("Opposite sentiment.", -10.0));
+    data.add(new Score("Valid score.", 5.0));
+    data.add(new Score("lower case sentence.", 10.0));
+    data.add(new Score("No punctuation", 20.0));
+    data.add(new Score("More positive.", 20.0));
+    List<String> result = tester.filterSentences(data);
+
+    assertEquals(result.get(0), "Valid score.");
+    assertEquals(result.get(1), "More positive.");
+    assertEquals(result.size(), 2);
   }
 
 }

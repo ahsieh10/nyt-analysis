@@ -1,7 +1,10 @@
 package edu.brown.cs32.mocks;
 
 public class MockSentimentJson {
-    public final static String NYTSentence = "WASHINGTON  Treasury Secretary Janet L. Yellen on Thursday called for a constructive  and healthy  economic relationship between the United States and China  one in which the two nations could work together to confront global challenges in spite of their conflicting national security interests.";
+//    public final static String NYTSentence = "WASHINGTON  Treasury Secretary Janet L. Yellen on Thursday called for a constructive  and healthy  economic relationship between the United States and China  one in which the two nations could work together to confront global challenges in spite of their conflicting national security interests.";
+
+    public final static String NYTSentence = "WASHINGTON — Treasury Secretary Janet L. Yellen on Thursday called for a “constructive” and “healthy” economic relationship between the United States and China, one in which the two nations could work together to confront global challenges in spite of their conflicting national security interests.";
+    public final static String NYTText = "Shirt fits weird.My shirt shrunk.The shirt costs too much for the quality.";
 
     public final static String intMockJson = "{\""
         + "agreement\":\"AGREEMENT\","
@@ -84,4 +87,19 @@ public class MockSentimentJson {
         + "{\"polarity_term_list\":[{\"text\":\"too much money\"}]},"
         + "{\"polarity_term_list\":[{\"text\":\"good environment\"}, {\"text\":\"mediocre\"}]}]}]}";
 
+    public final static String NYTMockJson = "{\"agreement\":\"DISAGREEMENT\","
+        + "\"confidence\":\"94\","
+        + "\"irony\":\"NONIRONIC\","
+        + "\"model\":\"general_en\","
+        + "\"score_tag\":\"N\","
+        + "\"sentence_list\":["
+        + "{\"confidence\":\"94\", \"score_tag\":\"N\", \"text\":\"Shirt fits weird.\", "
+        + "\"segment_list\":["
+        + "{\"polarity_term_list\":[{\"text\":\"weird\"}]}]},"
+        + "{\"confidence\":\"99\", \"score_tag\":\"NEU\", \"text\":\"My shirt shrunk.\", "
+        + "\"segment_list\":["
+        + "{\"polarity_term_list\":[]}]},"
+        + "{\"confidence\":\"90\", \"score_tag\":\"N\", \"text\":\"The shirt costs too much for the quality.\", "
+        + "\"segment_list\":["
+        + "{\"polarity_term_list\":[{\"text\":\"too much\"}]}]}]}";
 }
