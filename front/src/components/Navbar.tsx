@@ -12,15 +12,42 @@ interface NavbarProps {
 
 const Navbar = ({ queryParam, submitInput, togglePopup }: NavbarProps) => {
   const [input, setInput] = useState("");
+  const [logoText, setLogoText] = useState<JSX.Element>(
+    <>
+      <span className="main-blue">NYT</span> Sentiment Analysis
+    </>
+  );
 
   useEffect(() => {
     setInput(queryParam);
   }, [queryParam]);
-  
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 700) {
+        setLogoText(
+          <>
+            <span className="main-blue">N</span>SA
+          </>
+        );
+      } else {
+        setLogoText(
+          <>
+            <span className="main-blue">NYT</span> Sentiment Analysis
+          </>
+        );
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <nav className="navbar">
       <Link to="/" className="logo">
-        <span className="main-blue">NYT</span> Sentiment Analysis
+        {logoText}
       </Link>
       <div className="input-area">
         <button className="about-btn" onClick={togglePopup}>

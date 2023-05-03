@@ -1,10 +1,10 @@
 import ResultSection from "./ResultSection";
-import KeywordCloud from "./KeywordCloud";
 import { motion } from "framer-motion";
 import { animationDuration } from "../../../constants/constants";
 import { SuccessDataResult } from "../../../interfaces/interfaces";
 import { useRef, useState, useEffect } from "react";
 import ToggleElement from "./ToggleElement";
+import Keywords from "./keywords/Keywords";
 import "./Results.scss";
 
 interface ResultsProps {
@@ -20,14 +20,18 @@ const Results = ({ result, query, handleSubmit }: ResultsProps) => {
   const [activeToggle, setActiveToggle] = useState("All");
   const [indicatorStyle, setIndicatorStyle] = useState({
     x: 0,
+    y: 0,
     width: 0,
+    height: 0,
   });
 
   const moveIndicator = (box: DOMRect) => {
     if (!parentRef.current) return;
     const left = box.left - parentRef.current.getBoundingClientRect().left;
+    const top = box.top - parentRef.current.getBoundingClientRect().top;
     const width = box.width;
-    setIndicatorStyle({ x: left, width });
+    const height = box.height;
+    setIndicatorStyle({ x: left, y: top, width, height });
   };
 
   useEffect(() => {
@@ -87,7 +91,7 @@ const Results = ({ result, query, handleSubmit }: ResultsProps) => {
           title="Most biased sentences"
           innerContent={
             <div>
-              {result.biased.map((sentence, i) => (
+              {result.biased.slice(0, 10).map((sentence, i) => (
                 <div key={i}>
                   <div>{sentence}</div>
                   <br />
@@ -101,13 +105,11 @@ const Results = ({ result, query, handleSubmit }: ResultsProps) => {
         <ResultSection
           title="Keywords"
           innerContent={
-            <KeywordCloud
-              handleSubmit={handleSubmit}
+            <Keywords
+              onKeywordClick={handleSubmit}
               words={Array.from(
-                new Set(
-                  result.articles.map((article) => article.keywords).flat()
-                )
-              ).slice(0, 25)}
+                new Set(result.articles.map((a) => a.keywords).flat())
+              ).slice(0, 18)}
             />
           }
         />

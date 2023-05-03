@@ -1,7 +1,22 @@
 .analyze {
   margin: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 
   .main-container {
     display: flex;
+  }
+
+  .loading-box {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-family: "Source Sans Pro";
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1rem;
   }
 }

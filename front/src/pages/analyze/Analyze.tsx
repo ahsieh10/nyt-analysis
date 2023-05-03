@@ -7,6 +7,7 @@ import Sidebar from "./Sidebar";
 import Results from "./results/Results";
 import Scrollbars from "react-custom-scrollbars-2";
 import Popup from "./AboutPopup";
+import { BallTriangle } from "react-loader-spinner";
 import "./Analyze.scss";
 
 const Analyze = () => {
@@ -61,7 +62,17 @@ const Analyze = () => {
           togglePopup={togglePopup}
         />
         {loading ? (
-          <div>Loading...</div>
+          <div className="loading-box">
+            Loading...{" "}
+            <BallTriangle
+              height={25}
+              width={25}
+              radius={5}
+              color="#34abff"
+              ariaLabel="ball-triangle-loading"
+              visible={true}
+            />
+          </div>
         ) : result ? (
           <div className="main-container">
             <Sidebar result={result} />

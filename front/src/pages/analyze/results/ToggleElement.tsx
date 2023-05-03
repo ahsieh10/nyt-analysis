@@ -35,6 +35,17 @@ const ToggleElement = ({
     });
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (active && elementRef.current) {
+        moveIndicator(elementRef.current.getBoundingClientRect());
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [active]);
+
   return (
     <span
       ref={elementRef}
