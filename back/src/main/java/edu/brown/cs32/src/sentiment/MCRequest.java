@@ -13,6 +13,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class that calls MC API to get sentiment json
+ */
 public class MCRequest implements MCInter {
 //  /**
 //   * Given a list of 10 article abstracts, it will combine it into one string and analyze the
@@ -46,11 +49,6 @@ public class MCRequest implements MCInter {
     return JSONConverter.fromJson(json, SentimentJson.class);
   }
 
-//  @Override
-//  public String getSentiment(List<String> articles) throws IOException {
-//    SentimentJson sent = this.apiRequest(articles);
-//    return sent.score_tag;
-//  }
 
   /**
    * Combines NYT article abstracts into one long text to be used in url for API call
@@ -80,7 +78,6 @@ public class MCRequest implements MCInter {
    * @return json from api request
    */
   private String makeRequest(String url) throws IOException {
-    //TODO: error handle IOException?
     URL con = new URL(url);
     HttpURLConnection clientConnection = (HttpURLConnection) con.openConnection();
     clientConnection.connect();

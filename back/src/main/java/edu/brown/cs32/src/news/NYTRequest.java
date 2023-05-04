@@ -21,7 +21,7 @@ public class NYTRequest implements NYTInter {
    */
   @Override
   public Map<String, Object> apiRequest(String keyword) throws IOException {
-    String url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + keyword + "&api-key="; //+ Keys.NYTKey;
+    String url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + keyword + "&api-key=" + Keys.NYTKey;
     return RequestUtil.request(url);
   }
 }

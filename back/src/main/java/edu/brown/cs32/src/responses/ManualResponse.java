@@ -37,7 +37,6 @@ public class ManualResponse implements CombinedResponse {
    */
   @Override
   public String getResponse(String keyword){
-
     Map<String, Object> articleResponse = this.nytQuery.getArticles(keyword);
     if(articleResponse.get("status").equals("success")){
       String sentiment;

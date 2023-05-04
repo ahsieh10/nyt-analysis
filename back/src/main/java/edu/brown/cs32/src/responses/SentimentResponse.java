@@ -20,4 +20,28 @@ public class SentimentResponse {
     this.sentiment = sentiment;
     this.biased = biased;
   }
+
+  /**
+   * Getter for sentiment
+   * @return sentiment
+   */
+  public String getSentiment() {
+    return sentiment;
+  }
+
+  /**
+   * Getter for articles
+   * @return list of articles
+   */
+  public List<Article> getArticles() {
+    return articles;
+  }
+
+  /**
+   * Getter for biased
+   * @return list of biased sentences
+   */
+  public List<String> getBiased() {
+    return biased;
+  }
 }

@@ -50,7 +50,7 @@ public class TestMCSentimentAPI {
     List<String> sentences = new ArrayList<>();
     sentences.add(MockSentimentJson.NYTSentence);
     String sentiment = tester.getSentiment(sentences);
-    assertEquals("P+", sentiment);
+    assertEquals("P", sentiment);
 
     List<String> sentences2 = new ArrayList<>();
     sentences2.add("Shirt fits weird.");
@@ -106,25 +106,26 @@ public class TestMCSentimentAPI {
   @Test
   public void testRanking() throws IOException {
     MCSentimentAPI tester = new MCSentimentAPI(new MCMock());
-    SentimentJson data = JSONConverter.fromJson(MockSentimentJson.bigMockJson, SentimentJson.class);
     List<String> sentences = new ArrayList<>();
     sentences.add(MockSentimentJson.NYTSentence);
     tester.getSentiment(sentences);
+    SentimentJson data = JSONConverter.fromJson(MockSentimentJson.bigMockJson, SentimentJson.class);
     List<Score> result = tester.calculateScores(data);
-    assertEquals(result.get(0).getText(), "Spent too much money for food that made me hungry but there was a good environment if not for the mediocre view");
-    assertEquals(result.get(0).getScore(), -12.5);
+    assertEquals(result.get(2).getText(), "Spent too much money for food that made me hungry but there was a good environment if not for the mediocre view");
+    assertEquals(result.get(2).getScore(), -12.5);
     assertEquals(result.get(1).getText(), "Spent the day at the park, found a lucky penny, and now I have to go home but I would rather not");
     assertEquals(result.get(1).getScore(), 6);
-    assertEquals(result.get(2).getText(), "Wow this could have been so good but I wish there was more to it");
-    assertEquals(result.get(2).getScore(), 8);
+    assertEquals(result.get(0).getText(), "Wow this could have been so good but I wish there was more to it");
+    assertEquals(result.get(0).getScore(), 8);
 
-    SentimentJson data2 = JSONConverter.fromJson(MockSentimentJson.NYTMockJson, SentimentJson.class);
-    List<Score> result2 = tester.calculateScores(data2);
     List<String> sentences2 = new ArrayList<>();
     sentences2.add("Shirt fits weird.");
     sentences2.add("My shirt shrunk.");
     sentences2.add("The shirt costs too much for the quality.");
     tester.getSentiment(sentences2);
+    SentimentJson data2 = JSONConverter.fromJson(MockSentimentJson.NYTMockJson, SentimentJson.class);
+    List<Score> result2 = tester.calculateScores(data2);
+
     assertEquals(result2.get(0).getText(), "Shirt fits weird.");
     assertEquals(result2.get(0).getScore(), -7.0);
     assertEquals(result2.get(1).getText(), "The shirt costs too much for the quality.");

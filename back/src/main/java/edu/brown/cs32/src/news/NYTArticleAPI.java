@@ -6,10 +6,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
-import edu.brown.cs32.src.responses.utils.RequestUtil;
 import java.util.Map;
-import edu.brown.cs32.src.privatekey.Keys;
-import edu.brown.cs32.src.news.NYTRequest;
 
 /**
  * This class uses the user search query to make a request to the NYT API and get 10 articles
@@ -36,6 +33,7 @@ public class NYTArticleAPI{
     Map<String, Object> results = new HashMap<>();
     try{
       articles = this.requester.apiRequest(keyword);
+
     }
     catch(IOException e){
       results.put("status", "error_bad_json");
@@ -59,6 +57,7 @@ public class NYTArticleAPI{
       return results;
     }
   }
+
 
   /**
    * Takes a list of articles and returns a list of their lead paragraphs (for sentiment extracting)

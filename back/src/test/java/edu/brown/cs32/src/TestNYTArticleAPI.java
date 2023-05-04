@@ -18,7 +18,7 @@ public class TestNYTArticleAPI {
   @Test
   public void testGetArticles() throws IOException {
     NYTArticleAPI api = new NYTArticleAPI(new NYTMock());
-    Map<String, Object> results = api.getArticles("korea");
+    Map<String, Object> results = api.getArticles("china");
     assertEquals(results.get("status"),"success");
     assertEquals(results.keySet().size(), 2);
     List<Article> articles = (List<Article>)results.get("data");
@@ -43,7 +43,7 @@ public class TestNYTArticleAPI {
   @Test
   public void testFilterParagraphs(){
     NYTArticleAPI api = new NYTArticleAPI(new NYTMock());
-    Map<String, Object> results = api.getArticles("korea");
+    Map<String, Object> results = api.getArticles("china");
     List<Article> articles = (List<Article>)results.get("data");
     List<String> paragraphs = NYTArticleAPI.filterParagraphs(articles);
     assertEquals(paragraphs.size(), 2);

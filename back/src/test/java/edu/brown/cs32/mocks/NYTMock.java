@@ -5,9 +5,13 @@ import edu.brown.cs32.mocks.MockArticles;
 import java.util.Map;
 import java.util.HashMap;
 
+/**
+ * Class that uses mocks instead of calling NYT API
+ */
 public class NYTMock implements NYTInter {
   private Map<String, Map<String, Object>> queries = new HashMap<String, Map<String, Object>>(){{
-    put("korea", MockArticles.fullNYTResponse());
+    put("china", MockArticles.fullNYTResponse());
+    put("shirt", MockArticles.getNYTResponse(MockArticles.shirtResponse));
   }};
 
   /**

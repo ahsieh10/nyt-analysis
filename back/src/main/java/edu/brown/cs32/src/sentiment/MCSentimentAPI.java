@@ -76,20 +76,6 @@ public class MCSentimentAPI {
      return filtered;
    }
 
-//  /**
-//   * Assigns sentences their scores and updates it based on confidence, polarity terms, score tags
-//   * @return list of sentences and their scores, not ordered
-//   * @throws IllegalStateException if this method is called before sentiment is analyzed
-//   */
-//  private List<Score> assignSentenceScores() throws IllegalStateException {
-//    if (this.sentimentData == null) {
-//      //TODO: throw error?
-//      throw new IllegalStateException("Must get sentiment before ranking sentences.");
-//    } else {
-//      return calculateScores(this.sentimentData);
-//    }
-//  }
-
   /**
    * Calls helper methods to update scores used to rank sentences
    * (Public for testing purposes)
@@ -134,9 +120,9 @@ public class MCSentimentAPI {
    */
   private boolean compare(List<Score> scores, int j) {
     if (Math.signum(this.scoreMap.get(this.sentimentData.score_tag)) == -1) {
-      return scores.get(j).getScore() < scores.get(j + 1).getScore();
-    } else {
       return scores.get(j).getScore() > scores.get(j + 1).getScore();
+    } else {
+      return scores.get(j).getScore() < scores.get(j + 1).getScore();
     }
   }
 
