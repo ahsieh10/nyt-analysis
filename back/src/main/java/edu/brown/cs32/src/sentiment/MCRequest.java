@@ -17,7 +17,6 @@ import java.util.Map;
  * Class that calls MC API to get sentiment json
  */
 public class MCRequest implements MCInter {
-
   /**
    * Given a list of 10 article abstracts, it will combine it into one string and analyze the
    * sentiment via a call to MeaningCloud's API
@@ -48,16 +47,18 @@ public class MCRequest implements MCInter {
       text += article;
     }
 
-    text = text.replaceAll("[\\p{Punct}&&[^.?!]]", " ");
+    text = text.replaceAll("[\\p{Punct}&&[^.?!,:;]]", " ");
     text = text.replaceAll("\\?", ".");
     text = text.replaceAll("!", ".");
     text = text.replaceAll("—", " ");
     text = text.replaceAll("”", " ");
     text = text.replaceAll("“", " ");
+    if (text.length() > 4000) {
+      text = text.substring(0, 4000);
+    }
     String url = "https://api.meaningcloud.com/sentiment-2.1?key=" + Keys.MCKey +
         "&lang=en&txt=" + text + "&model=general";
     url = url.replaceAll("\\s+","%20");
-    System.err.println(url);
     return url;
   }
 

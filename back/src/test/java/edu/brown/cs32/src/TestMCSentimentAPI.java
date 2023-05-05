@@ -68,14 +68,14 @@ public class TestMCSentimentAPI {
   public void testGetURL() {
     List<String> articles = new ArrayList<>();
     articles.add("sentence | ' number 1 h“ ” ends here.");
-    articles.add("sentence two — with / symbol and = symbol and question ? symbol.");
-    articles.add("sentence 3 with   weird       spaces. ] [ \"c \\ +$#@!~%^&*()_+;><");
+    articles.add("sentence two — with / symbol and = symbol, and question ? symbol.");
+    articles.add("sentence 3: with   weird       spaces. ] [ \"c \\ +$#@!~%^&*()_+;><");
     MCRequest tester = new MCRequest();
     String result = tester.getURL(articles);
     String expected = "https://api.meaningcloud.com/sentiment-2.1?"
         + "key=f5cb66634417b2b3b554b1d3359bc1f2&lang=en&txt="
-        + "sentence%20number%201%20h%20ends%20here.sentence%20two%20with%20symbol%20and%20symbol%20and%20question%20.%20symbol."
-        + "sentence%203%20with%20weird%20spaces.%20c%20.%20&model=general";
+        + "sentence%20number%201%20h%20ends%20here.sentence%20two%20with%20symbol%20and%20symbol,%20and%20question%20.%20symbol."
+        + "sentence%203:%20with%20weird%20spaces.%20c%20.%20;%20&model=general";
     assertEquals(expected, result);
 
     List<String> articles2 = new ArrayList<>();
