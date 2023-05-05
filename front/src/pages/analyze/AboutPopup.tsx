@@ -1,6 +1,6 @@
-import "./AboutPopup.scss";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import { AnimatePresence, motion } from "framer-motion";
+import "./AboutPopup.scss";
 
 interface PopupProps {
   popupActive: boolean;
@@ -12,7 +12,11 @@ const Popup = ({ popupActive, togglePopup }: PopupProps) => {
     <AnimatePresence>
       {popupActive && (
         <div className="about-page">
-          <motion.div className="overlay" exit={{ y: -500, opacity: 0 }}>
+          <motion.div
+            className="overlay"
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
             <motion.div
               className="popup-background"
               initial={{ y: -500 }}

@@ -4,9 +4,7 @@ import "@testing-library/jest-dom";
 import Analyze from "../pages/analyze/Analyze";
 import { MemoryRouter } from "react-router-dom";
 import App from "../App";
-import {
-  TEXT_navbar_accessible_name,
-} from "../pages/analyze/Analyze";
+import { TEXT_navbar_accessible_name } from "../pages/analyze/Analyze";
 import userEvent from "@testing-library/user-event";
 import {
   TEXT_input_box_accessible_name,
@@ -14,7 +12,7 @@ import {
   TEXT_about_button_accessible_name,
 } from "../components/Navbar";
 import { act } from "react-dom/test-utils";
-import Results from "../pages/analyze/results/Results"
+import Results from "../pages/analyze/results/Results";
 import { mockSuccessResponse } from "../mocks/exampleResponse";
 import { isSuccessDataResult } from "../api/api";
 
@@ -53,7 +51,6 @@ test("tests for error message with invalid query", async () => {
   });
 });
 
-
 test("tests for valid query", async () => {
   act(() => {
     userEvent.type(inputBox, "japan");
@@ -61,8 +58,8 @@ test("tests for valid query", async () => {
   });
 
   await waitFor(() => {
-    const { getByText } = within(screen.getByRole("main-body"))
-    expect(getByText("OVERALL SENTIMENT")).toBeInTheDocument()
+    const { getByText } = within(screen.getByRole("main-body"));
+    expect(getByText("OVERALL SENTIMENT")).toBeInTheDocument();
     expect(getByText("NEGATIVE")).toBeInTheDocument();
     expect(getByText("MOST BIASED SENTENCES")).toBeInTheDocument();
     expect(
@@ -73,8 +70,7 @@ test("tests for valid query", async () => {
     expect(getByText("KEYWORDS")).toBeInTheDocument();
     expect(getByText("SOUTH CHINA SEA")).toBeInTheDocument();
     expect(getByText("ARTICLES ANALYZED")).toBeInTheDocument();
-  })
-
+  });
 });
 
 test("tests for about button on analyze page", async () => {
@@ -86,9 +82,9 @@ test("tests for about button on analyze page", async () => {
     const results = screen.getByText("About Page");
     expect(results).toBeInTheDocument();
   });
-  
+
   await waitFor(() => {
-    const results = screen.getByRole("about-body")
+    const results = screen.getByRole("about-body");
     expect(results).toBeInTheDocument();
-    });
+  });
 });
