@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { createSearchParams, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { animationDuration } from "../../constants/constants";
 import Popup from "../analyze/AboutPopup";
@@ -22,9 +22,10 @@ const Home = () => {
   const [imgLoaded, setImgLoaded] = useState(false);
   const [isEntering, setIsEntering] = useState(true);
   const [popup, setPopup] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const togglePopup = () => {
-    setPopup(!popup);
+    setPopup((prev) => !prev);
   };
 
   const goToAnalyze = () => {
@@ -38,6 +39,22 @@ const Home = () => {
       });
     }, animationDuration * 1000);
   };
+
+  useEffect(() => {
+    if (inputRef.current) inputRef.current.focus();
+  }, [inputRef]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      console.log(e.key);
+      if (e.key === "a") {
+        togglePopup();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   return (
     <div
@@ -68,11 +85,13 @@ const Home = () => {
             role="home-input-box"
           >
             <input
+              ref={inputRef}
               type="text"
               value={input}
               placeholder="Enter a term..."
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => {
+                e.stopPropagation();
                 if (e.key === "Enter") goToAnalyze();
               }}
             />

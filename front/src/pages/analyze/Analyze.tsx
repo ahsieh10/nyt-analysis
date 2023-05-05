@@ -1,28 +1,37 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { SuccessDataResult, APIErrorResponse } from "../../interfaces/interfaces";
+import { SuccessDataResult } from "../../interfaces/interfaces";
 import { getArticleAnalysis, isSuccessDataResult } from "../../api/api";
+import { BallTriangle } from "react-loader-spinner";
+import { Sentiment } from "../../constants/constants";
+import { SentimentContext } from "../../contexts/sentimentContext";
 import Navbar from "../../components/Navbar";
 import Sidebar from "./Sidebar";
 import Results from "./results/Results";
 import Scrollbars from "react-custom-scrollbars-2";
 import Popup from "./AboutPopup";
-import { BallTriangle } from "react-loader-spinner";
-import { Sentiment } from "../../constants/constants";
-import { SentimentContext } from "../../contexts/sentimentContext";
+import Notification from "../../components/Notification";
 import "./Analyze.scss";
-export const TEXT_navbar_accessible_name = "This is the navigation bar. You can get back to the home page from here, learn about the app through the info page, or search for more terms."
+
+export const TEXT_navbar_accessible_name =
+  "This is the navigation bar. You can get back to the home page from here, learn about the app through the info page, or search for more terms.";
 
 const Analyze = () => {
   const [params, setParams] = useSearchParams();
   const [queryParam, setQueryParam] = useState("");
   const [sentiment, setSentiment] = useState<Sentiment>(Sentiment.POSITIVE);
   const [result, setResult] = useState<SuccessDataResult | null>(null);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [notification, setNotification] = useState("");
+  const [notifictionState, setNotificationState] = useState<"hidden" | "shown">(
+    "hidden"
+  );
+  const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
   const [loading, setLoading] = useState(true);
   const [popup, setPopup] = useState(false);
 
   const togglePopup = () => {
-    setPopup(!popup);
+    setPopup((prev) => !prev);
   };
 
   const getResult = async (query: string) => {
@@ -33,7 +42,7 @@ const Analyze = () => {
       setSentiment(sentimentToEnum(res.sentiment));
     } else {
       setResult(null);
-      console.log(res.message);
+      setErrorMessage(res.error_message);
     }
     setLoading(false);
   };
@@ -56,9 +65,29 @@ const Analyze = () => {
       setParams({ query: input });
       setLoading(true);
     } else {
-      // display message saying cannot submit empty string
+      if (input === "") {
+        setNotification("Cannot submit an empty query.");
+      } else {
+        setNotification("You've entered the same query.");
+      }
+      setNotificationState("shown");
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      const newId = setTimeout(() => {
+        setNotificationState("hidden");
+      }, 2000);
+      setTimeoutId(newId);
     }
   };
+
+  useEffect(() => {
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [timeoutId]);
 
   useEffect(() => {
     setLoading(false);
@@ -67,13 +96,31 @@ const Analyze = () => {
     if (query && query !== "") {
       setQueryParam(query);
       getResult(query);
+    } else {
+      setErrorMessage("Invalid query.");
     }
   }, [params]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      console.log(e.key);
+      if (e.key === "a") {
+        togglePopup();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   return (
     <SentimentContext.Provider value={sentiment}>
       <Scrollbars width="100%" height="100%" autoHide>
-      <div className="analyze" aria-label={TEXT_navbar_accessible_name} role="navbar">
+        <div
+          className="analyze"
+          aria-label={TEXT_navbar_accessible_name}
+          role="navbar"
+        >
           <Navbar
             queryParam={queryParam}
             submitInput={handleSubmit}
@@ -101,13 +148,19 @@ const Analyze = () => {
               />
             </div>
           ) : (
-            <div>
-              No valid query has been submitted, or the server has errored.
-            </div>
+            <div className="msg-box">{errorMessage} 😢</div>
           )}
         </div>
         <Popup popupActive={popup} togglePopup={togglePopup} />
       </Scrollbars>
+      {notification !== "" && (
+        <div className="analyze-overlay">
+          <Notification
+            message={notification}
+            animationState={notifictionState}
+          />
+        </div>
+      )}
     </SentimentContext.Provider>
   );
 };

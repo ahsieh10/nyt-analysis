@@ -1,0 +1,13 @@
+.notification-box {
+  position: absolute;
+  right: 0;
+  top: 6rem;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  border: 1px solid #ebebeb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}

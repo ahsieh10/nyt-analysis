@@ -63,7 +63,7 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
 const PlaceholderImage = () => {
   return (
     <div className="placeholder-img">
-      <MdOutlineNoPhotography size={"1.3rem"} />
+      <MdOutlineNoPhotography size={23} />
     </div>
   );
 };

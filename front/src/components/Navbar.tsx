@@ -1,6 +1,6 @@
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { Link } from "react-router-dom";
 import { SentimentContext } from "../contexts/sentimentContext";
 import {
@@ -8,11 +8,13 @@ import {
   getSentimentTextStyle,
 } from "../constants/constants";
 import "./Navbar.scss";
-export const TEXT_input_box_accessible_name = "Input box. Type the topic that you want to search here.";
+
+export const TEXT_input_box_accessible_name =
+  "Input box. Type the topic that you want to search here.";
 export const TEXT_submit_button_accessible_name =
   "This is the submit button. Click on it or press enter to search for your topic.";
-  export const TEXT_about_button_accessible_name =
-    "Here is the about button. Click it to learn more about the app and how it works.";
+export const TEXT_about_button_accessible_name =
+  "Here is the about button. Click it to learn more about the app and how it works.";
 
 interface NavbarProps {
   queryParam: string;
@@ -22,6 +24,7 @@ interface NavbarProps {
 
 const Navbar = ({ queryParam, submitInput, togglePopup }: NavbarProps) => {
   const [input, setInput] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
   const sentiment = useContext(SentimentContext);
   const [logoText, setLogoText] = useState<JSX.Element>(
     <>
@@ -57,6 +60,20 @@ const Navbar = ({ queryParam, submitInput, togglePopup }: NavbarProps) => {
     return () => window.removeEventListener("resize", handleResize);
   }, [sentiment]);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.key === "f" && inputRef.current) {
+        e.preventDefault();
+        e.stopPropagation();
+        inputRef.current.focus();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [inputRef]);
+
   return (
     <nav className="navbar">
       <Link to="/" className="logo">
@@ -75,15 +92,18 @@ const Navbar = ({ queryParam, submitInput, togglePopup }: NavbarProps) => {
         <div className="input-box">
           <FontAwesomeIcon icon={faSearch} />
           <input
+            ref={inputRef}
             value={input}
             aria-label={TEXT_input_box_accessible_name}
             role="textbox"
             type="text"
             placeholder="Search..."
             onChange={(e) => {
+              e.stopPropagation();
               setInput(e.target.value);
             }}
             onKeyDown={(e) => {
+              e.stopPropagation();
               if (e.key === "Enter") {
                 submitInput(input);
               }

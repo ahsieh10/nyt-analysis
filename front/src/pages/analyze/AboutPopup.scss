@@ -13,71 +13,72 @@
 .overlay {
   background: rgba(49, 49, 49, 0.8);
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.popup-content {
-  .popup-background {
-    // display: flex;
-    position: absolute;
-    // justify-content: center;
-    width: 35vw;
-    height: 70vh;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 14px 28px;
-    border-radius: 10px;
-    background-color: #ffffff;
+.popup-background {
+  // display: flex;
+  // position: absolute;
+  // justify-content: center;
+  width: 35vw;
+  height: 70vh;
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
+  padding: 14px 28px;
+  border-radius: 10px;
+  background-color: #ffffff;
 
-    .about-app {
-      display: flex;
-      // position: fixed;
+  .about-app {
+    display: flex;
+    // position: fixed;
 
-      font-size: 24px;
-      font-family: "Playfair Display";
-      font-style: normal;
-      font-weight: 700;
-      padding-bottom: 20px;
-      color: #3eaeff;
-    }
-
-    .about-body {
-      display: flex;
-      align-items: center;
-      font-family: "Playfair Display";
-      font-weight: lighter;
-      font-size: 16px;
-      color: #707070;
-    }
+    font-size: 24px;
+    font-family: "Playfair Display";
+    font-style: normal;
+    font-weight: 700;
+    padding-bottom: 20px;
+    color: #3eaeff;
   }
 
-  .close-btn {
-    cursor: pointer;
+  .about-body {
     display: flex;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 18px;
-    height: 18px;
-    background-color: #ffffff;
-    border-color: #f9f9f9;
-    border-width: 2px;
-    border-radius: 30%;
     align-items: center;
+    font-family: "Playfair Display";
+    font-weight: lighter;
+    font-size: 16px;
+    color: #707070;
+  }
+}
 
-    .close-button-content {
-      display: flex;
-      margin-top: -6.5px;
-      margin-left: 1.5px;
-      font-family: "Playfair Display";
-      font-weight: lighter;
-      font-size: 14px;
-      color: #707070;
-    }
+.close-btn {
+  cursor: pointer;
+  display: flex;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 18px;
+  height: 18px;
+  background-color: #ffffff;
+  border-color: #f9f9f9;
+  border-width: 2px;
+  border-radius: 30%;
+  align-items: center;
 
-    &:hover {
-      background-color: #8d8d8d;
-    }
+  .close-button-content {
+    display: flex;
+    margin-top: -6.5px;
+    margin-left: 1.5px;
+    font-family: "Playfair Display";
+    font-weight: lighter;
+    font-size: 14px;
+    color: #707070;
+  }
+
+  &:hover {
+    background-color: #8d8d8d;
   }
 }
 

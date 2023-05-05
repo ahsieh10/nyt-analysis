@@ -53,7 +53,7 @@ test("tests for error message with invalid query", async () => {
   });
 });
 
-/**
+
 test("tests for valid query", async () => {
   act(() => {
     userEvent.type(inputBox, "japan");
@@ -76,7 +76,6 @@ test("tests for valid query", async () => {
   })
 
 });
-*/
 
 test("tests for about button on analyze page", async () => {
   act(() => {

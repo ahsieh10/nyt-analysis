@@ -6,8 +6,8 @@ export interface APISuccessResponse {
 }
 
 export interface APIErrorResponse {
-  result: string;
-  message: string;
+  status: string;
+  error_message: string;
 }
 
 export interface SuccessDataResult {
