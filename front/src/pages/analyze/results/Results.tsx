@@ -1,7 +1,9 @@
 import ResultSection from "./ResultSection";
 import { motion } from "framer-motion";
 import { animationDuration } from "../../../constants/constants";
-import { SuccessDataResult } from "../../../interfaces/interfaces";
+import {
+  SuccessDataResult,
+} from "../../../interfaces/interfaces";
 import { useRef, useState, useEffect } from "react";
 import ToggleElement from "./ToggleElement";
 import Keywords from "./keywords/Keywords";
