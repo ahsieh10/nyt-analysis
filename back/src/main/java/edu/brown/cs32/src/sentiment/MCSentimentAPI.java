@@ -85,10 +85,15 @@ public class MCSentimentAPI {
   public List<Score> calculateScores(SentimentJson sentimentData) {
     List<Score> unorderedScores = new ArrayList<>();
     for (Sentence currSentence : sentimentData.sentence_list) {
-      Score currScore = new Score(currSentence.text, this.rankScoreTags(currSentence.score_tag));
-      currScore.setScore(this.rankPolarityTerms(currSentence.segment_list, currScore.getScore()));
-      currScore.setScore(this.rankConfidence(currSentence.confidence, currScore.getScore()));
-      unorderedScores.add(currScore);
+      if (currSentence != null) {
+        Score currScore = new Score(currSentence.text, this.rankScoreTags(currSentence.score_tag));
+        if (currSentence.segment_list != null) {
+          currScore.setScore(
+              this.rankPolarityTerms(currSentence.segment_list, currScore.getScore()));
+        }
+        currScore.setScore(this.rankConfidence(currSentence.confidence, currScore.getScore()));
+        unorderedScores.add(currScore);
+      }
     }
     return this.orderSentenceScores(unorderedScores);
   }
