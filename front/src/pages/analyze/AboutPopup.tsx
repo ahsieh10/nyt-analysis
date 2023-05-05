@@ -19,7 +19,7 @@ const Popup = ({ popupActive, togglePopup }: PopupProps) => {
                   <div className="about-app">
                     <h2> About Page</h2>
                   </div>
-                  <div className="about-body">
+                  <div className="about-body" role="about-body">
                     <p>
                       This website utilizes The New York Times's Application
                       Programming Interface and a natural language processing

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { SuccessDataResult } from "../../interfaces/interfaces";
+import { SuccessDataResult, APIErrorResponse } from "../../interfaces/interfaces";
 import { getArticleAnalysis, isSuccessDataResult } from "../../api/api";
 import Navbar from "../../components/Navbar";
 import Sidebar from "./Sidebar";
@@ -9,6 +9,7 @@ import Scrollbars from "react-custom-scrollbars-2";
 import Popup from "./AboutPopup";
 import { BallTriangle } from "react-loader-spinner";
 import "./Analyze.scss";
+export const TEXT_navbar_accessible_name = "This is the navigation bar. You can get back to the home page from here, learn about the app through the info page, or search for more terms."
 
 const Analyze = () => {
   const [params, setParams] = useSearchParams();
@@ -55,14 +56,16 @@ const Analyze = () => {
 
   return (
     <Scrollbars width="100%" height="100%" autoHide>
-      <div className="analyze">
+      <div className="analyze" aria-label={TEXT_navbar_accessible_name} role="navbar">
         <Navbar
           queryParam={queryParam}
           submitInput={handleSubmit}
           togglePopup={togglePopup}
         />
         {loading ? (
-          <div className="loading-box">
+          <div
+            className="loading-box"
+          >
             Loading...{" "}
             <BallTriangle
               height={25}
@@ -74,7 +77,7 @@ const Analyze = () => {
             />
           </div>
         ) : result ? (
-          <div className="main-container">
+          <div className="main-container" role="main-body">
             <Sidebar result={result} />
             <Results
               result={result}
