@@ -1,11 +1,16 @@
 import ResultSection from "./ResultSection";
 import { motion } from "framer-motion";
-import { animationDuration } from "../../../constants/constants";
+import {
+  animationDuration,
+  getSentimentBackgroundStyle,
+  getSentimentTextStyle,
+} from "../../../constants/constants";
 import { SuccessDataResult } from "../../../interfaces/interfaces";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
 import ToggleElement from "./ToggleElement";
 import Keywords from "./keywords/Keywords";
 import "./Results.scss";
+import { SentimentContext } from "../../../contexts/sentimentContext";
 
 interface ResultsProps {
   result: SuccessDataResult;
@@ -24,6 +29,7 @@ const Results = ({ result, query, handleSubmit }: ResultsProps) => {
     width: 0,
     height: 0,
   });
+  const sentiment = useContext(SentimentContext);
 
   const moveIndicator = (box: DOMRect) => {
     if (!parentRef.current) return;
@@ -72,7 +78,9 @@ const Results = ({ result, query, handleSubmit }: ResultsProps) => {
           />
         ))}
         <motion.div
-          className="toggle-indicator light-blue-background"
+          className={`toggle-indicator ${getSentimentBackgroundStyle(
+            sentiment
+          )}`}
           initial={{ x: 0, width: 0 }}
           animate={indicatorStyle}
         ></motion.div>
@@ -82,7 +90,11 @@ const Results = ({ result, query, handleSubmit }: ResultsProps) => {
           title="Overall Sentiment"
           horizontal
           innerContent={
-            <div className="sentiment-label">{result.sentiment}</div>
+            <div
+              className={`sentiment-label ${getSentimentTextStyle(sentiment)}`}
+            >
+              {result.sentiment}
+            </div>
           }
         />
       )}

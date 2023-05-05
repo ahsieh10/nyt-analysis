@@ -39,7 +39,7 @@ const KeywordCloud = ({ words, handleSubmit }: WordCloudProps) => {
       spiral="rectangular"
       rotate={rotate}
       padding={3}
-      fill={(d, i) => (Math.random() > 0.5 ? "#4bc6ff" : "#4b93ff")}
+      // fill={(d, i) => (Math.random() > 0.5 ? "#4bc6ff" : "#4b93ff")}
       onWordClick={onWordClick}
     />
   );

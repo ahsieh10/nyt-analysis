@@ -8,8 +8,9 @@
   .home-text-wrapper {
     flex: 2;
     display: flex;
-    padding-left: 4rem;
+    padding-left: 5rem;
     padding-right: 1rem;
+    position: relative;
 
     .home-text {
       display: flex;
@@ -83,12 +84,13 @@
     border-width: 2px;
     border-radius: 50%;
     background-color: #ffffff;
-    margin-top: 770px;
-    margin-left: -35px;
+    // margin-top: 770px;
+    // margin-left: -35px;
+    top: 30px;
+    right: 30px;
 
     .button-content-home {
       text-align: center;
-
       font-family: 'Playfair Display';
       font-style: normal;
       font-weight: 700;

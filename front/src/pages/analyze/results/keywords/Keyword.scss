@@ -5,7 +5,7 @@
   align-items: center;
   border-radius: 5px;
   text-align: center;
-  border: 1px solid #25afff;
+  // border: 1px solid #25afff;
   padding: 20px;
   cursor: pointer;
   position: relative;
@@ -19,7 +19,7 @@
   }
 
   .btn-overlay {
-    background-color: #25afff;
+    // background-color: #25afff;
     position: absolute;
     top: -1px;
     left: -1px;
@@ -33,6 +33,6 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 14px;
-    color: #25afff;
+    // color: #25afff;
   }
 }

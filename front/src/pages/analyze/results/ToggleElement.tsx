@@ -1,5 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import "./ToggleElement.scss";
+import { SentimentContext } from "../../../contexts/sentimentContext";
+import {
+  getSentimentBackgroundStyle,
+  getSentimentTextStyle,
+} from "../../../constants/constants";
 
 interface ToggleElementProps {
   label: string;
@@ -17,6 +22,7 @@ const ToggleElement = ({
   const elementRef = useRef<HTMLSpanElement>(null);
 
   const [fontsLoaded, setFontsLoaded] = useState(false);
+  const sentiment = useContext(SentimentContext);
 
   const handleClick = () => {
     setActive(label);
@@ -49,9 +55,9 @@ const ToggleElement = ({
   return (
     <span
       ref={elementRef}
-      className="toggle"
+      className={`toggle ${active ? getSentimentTextStyle(sentiment) : ""}`}
       onClick={handleClick}
-      style={active ? { color: "#3aacff" } : {}}
+      // style={active ? { color: "#3aacff" } : {}}
     >
       {label}
     </span>

@@ -6,10 +6,15 @@ import { motion } from "framer-motion";
 import { animationDuration } from "../../constants/constants";
 import Popup from "../analyze/AboutPopup";
 import "./Home.scss";
-export const TEXT_home_page_accessible_name = "Home page of The New York Times Sentiment Analysis App.";
-export const TEXT_input_box_accessible_name = "This is the input box. Search for a topic to find a summary of the sentiment analysis for that query.";
-export const TEXT_search_button_accessible_name = "This is the submitt button. Click it to get your results.";
-export const TEXT_about_button_accessible_name = "Here is the about button. Click it to learn more about the app and how it works.";
+
+export const TEXT_home_page_accessible_name =
+  "Home page of The New York Times Sentiment Analysis App.";
+export const TEXT_input_box_accessible_name =
+  "This is the input box. Search for a topic to find a summary of the sentiment analysis for that query.";
+export const TEXT_search_button_accessible_name =
+  "This is the submitt button. Click it to get your results.";
+export const TEXT_about_button_accessible_name =
+  "Here is the about button. Click it to learn more about the app and how it works.";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -55,7 +60,7 @@ const Home = () => {
         <div className="home-text">
           <div className="welcome-text">Welcome to</div>
           <h1>
-            <span className="main-blue">NYT</span> Sentiment Analysis
+            <span className="text-blue">NYT</span> Sentiment Analysis
           </h1>
           <div
             className="input-box"

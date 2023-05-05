@@ -8,6 +8,7 @@
 * {
   margin: 0;
   padding: 0;
+  scroll-behavior: auto;
 }
 
 body {
@@ -25,12 +26,52 @@ a {
   color: #000000;
 }
 
-.main-red {
+.text-blue {
+  color: colors.$mainBlue;
+}
+
+.text-red {
   color: colors.$mainRed;
 }
 
-.main-blue {
-  color: colors.$mainBlue;
+.text-purple {
+  color: colors.$mainPurple;
+}
+
+.border-blue {
+  border: 1px solid colors.$mainBlue;
+}
+
+.border-purple {
+  border: 1px solid colors.$mainPurple
+}
+
+.border-red {
+  border: 1px solid colors.$mainRed;
+}
+
+.background-blue {
+  background-color: colors.$lightBlue;
+}
+
+.background-red {
+  background-color: colors.$lightRed;
+}
+
+.background-purple {
+  background-color: colors.$lightPurple;
+}
+
+.background-highlight-blue {
+  background-color: colors.$mainBlue;
+}
+
+.background-highlight-red {
+  background-color: colors.$mainRed;
+}
+
+.background-highlight-purple {
+  background-color: colors.$mainPurple;
 }
 
 ::-webkit-input-placeholder {

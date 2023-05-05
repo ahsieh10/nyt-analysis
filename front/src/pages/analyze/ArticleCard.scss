@@ -59,8 +59,8 @@ $cardHeight: 80px;
 }
 
 .active {
-  background-color: colors.$mainBlue;
+  // background-color: colors.$mainBlue;
+  // border-color: colors.$mainBlue;
   color: #ffffff;
-  border-color: colors.$mainBlue;
   transform: scale(1.05);
 }

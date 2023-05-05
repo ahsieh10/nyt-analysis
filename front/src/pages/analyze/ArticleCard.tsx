@@ -1,6 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Article } from "../../interfaces/interfaces";
 import { MdOutlineNoPhotography } from "react-icons/md";
+import { SentimentContext } from "../../contexts/sentimentContext";
+import {
+  getSentimentBorderStyle,
+  getSentimentHighlightBackgroundStyle,
+} from "../../constants/constants";
 import "./ArticleCard.scss";
 
 interface ArticleCardProps {
@@ -9,12 +14,9 @@ interface ArticleCardProps {
 
 const ArticleCard = ({ article }: ArticleCardProps) => {
   const [mouseOver, setMouseOver] = useState(false);
+  const sentiment = useContext(SentimentContext);
 
   const getImageUrl = (article: Article): string => {
-    // const thumbnail = article.multimedia.filter(
-    //   (media) => media.subType === "thumbnail"
-    // )[0];
-
     if (article.thumbnail !== "") {
       return `https://static01.nyt.com/${article.thumbnail}`;
     }
@@ -24,7 +26,14 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
   return (
     <a className="card-link" href={article.webUrl} target="_blank">
       <div
-        className={`card ${mouseOver && "active"}`}
+        className={`card ${
+          mouseOver &&
+          "active" +
+            " " +
+            getSentimentHighlightBackgroundStyle(sentiment) +
+            " " +
+            getSentimentBorderStyle(sentiment)
+        }`}
         onMouseOver={() => setMouseOver(true)}
         onMouseOut={() => setMouseOver(false)}
       >
@@ -55,7 +64,6 @@ const PlaceholderImage = () => {
   return (
     <div className="placeholder-img">
       <MdOutlineNoPhotography size={"1.3rem"} />
-      {/* Put a camera/image icon with a slash through it */}
     </div>
   );
 };

@@ -1,7 +1,12 @@
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { SentimentContext } from "../contexts/sentimentContext";
+import {
+  getSentimentHighlightBackgroundStyle,
+  getSentimentTextStyle,
+} from "../constants/constants";
 import "./Navbar.scss";
 
 interface NavbarProps {
@@ -12,9 +17,11 @@ interface NavbarProps {
 
 const Navbar = ({ queryParam, submitInput, togglePopup }: NavbarProps) => {
   const [input, setInput] = useState("");
+  const sentiment = useContext(SentimentContext);
   const [logoText, setLogoText] = useState<JSX.Element>(
     <>
-      <span className="main-blue">NYT</span> Sentiment Analysis
+      <span className={`${getSentimentTextStyle(sentiment)}`}>NYT</span>{" "}
+      Sentiment Analysis
     </>
   );
 
@@ -27,13 +34,14 @@ const Navbar = ({ queryParam, submitInput, togglePopup }: NavbarProps) => {
       if (window.innerWidth <= 700) {
         setLogoText(
           <>
-            <span className="main-blue">N</span>SA
+            <span className={`${getSentimentTextStyle(sentiment)}`}>N</span>SA
           </>
         );
       } else {
         setLogoText(
           <>
-            <span className="main-blue">NYT</span> Sentiment Analysis
+            <span className={`${getSentimentTextStyle(sentiment)}`}>NYT</span>{" "}
+            Sentiment Analysis
           </>
         );
       }
@@ -42,7 +50,7 @@ const Navbar = ({ queryParam, submitInput, togglePopup }: NavbarProps) => {
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [sentiment]);
 
   return (
     <nav className="navbar">
@@ -71,7 +79,12 @@ const Navbar = ({ queryParam, submitInput, togglePopup }: NavbarProps) => {
             }}
           />
         </div>
-        <button className="search-btn" onClick={() => submitInput(input)}>
+        <button
+          className={`search-btn ${getSentimentHighlightBackgroundStyle(
+            sentiment
+          )}`}
+          onClick={() => submitInput(input)}
+        >
           <FontAwesomeIcon icon={faSearch} />
         </button>
       </div>
