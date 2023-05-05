@@ -4,7 +4,7 @@ import {
   SuccessDataResult,
 } from "../interfaces/interfaces";
 
-export const isResultSuscessResponse = (
+export const isResultSuccessResponse = (
   rjson: any
 ): rjson is APISuccessResponse => {
   if (!("result" in rjson)) return false;
@@ -29,7 +29,7 @@ export const getArticleAnalysis = async (
   const baseUrl = "http://localhost:4000/search?";
   const res = await fetch(`${baseUrl}keyword=${query}`);
   const data = await res.json();
-  if (isResultSuscessResponse(data)) {
+  if (isResultSuccessResponse(data)) {
     return data.data;
   }
   console.log(data);

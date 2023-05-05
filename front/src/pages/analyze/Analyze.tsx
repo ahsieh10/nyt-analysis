@@ -14,7 +14,7 @@ const Analyze = () => {
   const [params, setParams] = useSearchParams();
   const [queryParam, setQueryParam] = useState("");
   const [sentiment, setSentiment] = useState("");
-  const [result, setResult] = useState<SuccessDataResult | null>(null);
+  const [result, setResult] = useState<SuccessDataResult | null >(null);
   const [loading, setLoading] = useState(true);
   const [popup, setPopup] = useState(false);
 
