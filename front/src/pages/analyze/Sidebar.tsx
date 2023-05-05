@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 import { animationDuration } from "../../constants/constants";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import { SuccessDataResult } from "../../interfaces/interfaces";
+import "./Sidebar.scss";
 export const TEXT_sidebar_accessible_name =
   "This is the sidebar. It has clickable buttons that lead to links of the top 10 articles used to calculate the sentiment analysis";
-import "./Sidebar.scss";
 
 interface SidebarProps {
   result: SuccessDataResult;
