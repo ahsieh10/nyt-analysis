@@ -82,7 +82,19 @@ const Results = ({ result, query, handleSubmit }: ResultsProps) => {
           title="Overall Sentiment"
           horizontal
           innerContent={
-            <div className="sentiment-label">{result.sentiment}</div>
+            <div className="sentiment-label">
+              {result.sentiment === "P+" ?
+              (<div>Very Positive</div>)
+              : (result.sentiment === "P") ?
+              (<div>Positive</div>)
+              : (result.sentiment === "NEU") ?
+              (<div>Neutral</div>)
+              : (result.sentiment === "N") ?
+              (<div>Negative</div>)
+              : (result.sentiment) === "N+" ?
+              (<div>Very Negative</div>)
+              : (<div>No sentiment found.</div>)}
+            </div>
           }
         />
       )}

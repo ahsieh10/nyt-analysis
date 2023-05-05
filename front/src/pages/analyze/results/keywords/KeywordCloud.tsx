@@ -2,6 +2,7 @@ import WordCloud from "react-d3-cloud";
 import React, { useRef, useState, useCallback } from "react";
 import "./KeywordCloud.scss";
 
+/**
 interface WordCloudProps {
   words: string[];
   handleSubmit: (input: string) => void;
@@ -39,10 +40,11 @@ const KeywordCloud = ({ words, handleSubmit }: WordCloudProps) => {
       spiral="rectangular"
       rotate={rotate}
       padding={3}
-      fill={(d, i) => (Math.random() > 0.5 ? "#4bc6ff" : "#4b93ff")}
+      // fill={(d, i) => (Math.random() > 0.5 ? "#4bc6ff" : "#4b93ff")}
       onWordClick={onWordClick}
     />
   );
 };
 
 export default KeywordCloud;
+*/
