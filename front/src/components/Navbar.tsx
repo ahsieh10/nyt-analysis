@@ -8,6 +8,11 @@ import {
   getSentimentTextStyle,
 } from "../constants/constants";
 import "./Navbar.scss";
+export const TEXT_input_box_accessible_name = "Input box. Type the topic that you want to search here.";
+export const TEXT_submit_button_accessible_name =
+  "This is the submit button. Click on it or press enter to search for your topic.";
+  export const TEXT_about_button_accessible_name =
+    "Here is the about button. Click it to learn more about the app and how it works.";
 
 interface NavbarProps {
   queryParam: string;
@@ -59,7 +64,11 @@ const Navbar = ({ queryParam, submitInput, togglePopup }: NavbarProps) => {
       </Link>
       <div className="input-area">
         <button className="about-btn" onClick={togglePopup}>
-          <div className="button-content">
+          <div
+            className="button-content"
+            aria-label={TEXT_about_button_accessible_name}
+            role="about-button"
+          >
             <h2>i</h2>
           </div>
         </button>
@@ -67,6 +76,8 @@ const Navbar = ({ queryParam, submitInput, togglePopup }: NavbarProps) => {
           <FontAwesomeIcon icon={faSearch} />
           <input
             value={input}
+            aria-label={TEXT_input_box_accessible_name}
+            role="textbox"
             type="text"
             placeholder="Search..."
             onChange={(e) => {
@@ -83,6 +94,8 @@ const Navbar = ({ queryParam, submitInput, togglePopup }: NavbarProps) => {
           className={`search-btn ${getSentimentHighlightBackgroundStyle(
             sentiment
           )}`}
+          aria-label={TEXT_submit_button_accessible_name}
+          role="submit-button"
           onClick={() => submitInput(input)}
         >
           <FontAwesomeIcon icon={faSearch} />

@@ -89,7 +89,7 @@ const Home = () => {
         <button
           className="about-btn-home"
           aria-label={TEXT_about_button_accessible_name}
-          role="about-button"
+          role="about-btn-home"
           onClick={togglePopup}
         >
           <div className="button-content-home">
