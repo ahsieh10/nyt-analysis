@@ -67,14 +67,14 @@ public class TestMCSentimentAPI {
   @Test
   public void testGetURL() {
     List<String> articles = new ArrayList<>();
-    articles.add("sentence number 1 “ ” ends here.");
+    articles.add("sentence | ' number 1 h“ ” ends here.");
     articles.add("sentence two — with / symbol and = symbol and question ? symbol.");
     articles.add("sentence 3 with   weird       spaces. ] [ \"c \\ +$#@!~%^&*()_+;><");
     MCRequest tester = new MCRequest();
     String result = tester.getURL(articles);
     String expected = "https://api.meaningcloud.com/sentiment-2.1?"
         + "key=f5cb66634417b2b3b554b1d3359bc1f2&lang=en&txt="
-        + "sentence%20number%201%20ends%20here.sentence%20two%20with%20symbol%20and%20symbol%20and%20question%20.symbol."
+        + "sentence%20number%201%20h%20ends%20here.sentence%20two%20with%20symbol%20and%20symbol%20and%20question%20.%20symbol."
         + "sentence%203%20with%20weird%20spaces.%20c%20.%20&model=general";
     assertEquals(expected, result);
 
@@ -86,7 +86,7 @@ public class TestMCSentimentAPI {
     String expected2 = "https://api.meaningcloud.com/sentiment-2.1?"
         + "key=f5cb66634417b2b3b554b1d3359bc1f2&lang=en&txt="
         + "This%20food%20does%20not%20taste%20good.%20Won%20t%20come%20back%20again."
-        + "The%20service%20could%20not%20have%20been%20better!%20But%20they%20were%20rude%20to%20others."
+        + "The%20service%20could%20not%20have%20been%20better.%20But%20they%20were%20rude%20to%20others."
         + "Spent%20too%20much%20money%20for%20food%20that%20made%20me%20hungry.&model=general";
     assertEquals(expected2, result2);
 

@@ -41,7 +41,8 @@ public class ManualResponse implements CombinedResponse {
     if(articleResponse.get("status").equals("success")){
       String sentiment;
       try{
-        sentiment = this.sentimentLoader.getSentiment(filterParagraphs((List<Article>)articleResponse.get("data")));
+        List<String> text = filterParagraphs((List<Article>)articleResponse.get("data"));
+        sentiment = this.sentimentLoader.getSentiment(text);
         List<String> biased = this.sentimentLoader.getRankedSentences();
         return handleSuccess((List<Article>)articleResponse.get("data"), sentiment, biased);
       }
