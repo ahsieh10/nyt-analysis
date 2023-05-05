@@ -76,7 +76,7 @@
   }
 
   .about-btn-home {
-    position: fixed;
+    position: absolute;
     cursor: pointer;
     width: 40px;
     height: 40px;
@@ -86,8 +86,8 @@
     background-color: #ffffff;
     // margin-top: 770px;
     // margin-left: -35px;
-    top: 30px;
-    right: 30px;
+    bottom: 40px;
+    left: 40px;
 
     .button-content-home {
       text-align: center;
