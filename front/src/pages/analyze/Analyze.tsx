@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { SuccessDataResult } from "../../interfaces/interfaces";
-import { getArticleAnalysis, isSuccessDataResult } from "../../api/api";
+import { getArticleAnalysis } from "../../api/api";
 import { BallTriangle } from "react-loader-spinner";
-import { Sentiment } from "../../constants/constants";
 import { SentimentContext } from "../../contexts/sentimentContext";
 import Navbar from "../../components/Navbar";
 import Sidebar from "./Sidebar";
@@ -11,6 +10,8 @@ import Results from "./results/Results";
 import Scrollbars from "react-custom-scrollbars-2";
 import Popup from "./AboutPopup";
 import Notification from "../../components/Notification";
+import { isSuccessDataResult } from "../../api/responseValidation";
+import { Sentiment } from "../../enums/enums";
 import "./Analyze.scss";
 
 export const TEXT_navbar_accessible_name =
@@ -42,13 +43,19 @@ const Analyze = () => {
 
   const getResult = async (query: string) => {
     setLoading(true);
-    const res = await getArticleAnalysis(query);
-    if (isSuccessDataResult(res)) {
-      setResult(res);
-      setSentiment(sentimentToEnum(res.sentiment));
-    } else {
+    try {
+      const res = await getArticleAnalysis(query);
+      if (isSuccessDataResult(res)) {
+        setResult(res);
+        setSentiment(sentimentToEnum(res.sentiment));
+      } else {
+        setResult(null);
+        setErrorMessage(res.error_message);
+      }
+    } catch (err) {
+      console.error(err);
       setResult(null);
-      setErrorMessage(res.error_message);
+      setErrorMessage("An unknown error occured.");
     }
     setLoading(false);
   };

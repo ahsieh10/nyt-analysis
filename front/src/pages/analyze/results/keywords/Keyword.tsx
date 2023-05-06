@@ -1,4 +1,3 @@
-import "./Keyword.scss";
 import { motion } from "framer-motion";
 import { useContext, useState } from "react";
 import {
@@ -7,6 +6,7 @@ import {
   getSentimentTextStyle,
 } from "../../../../constants/constants";
 import { SentimentContext } from "../../../../contexts/sentimentContext";
+import "./Keyword.scss";
 
 /* Component setting up structure for the keywords section of the Analyze page.
 User can click on any of the keyword buttons to submit a query for that word */

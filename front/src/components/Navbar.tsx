@@ -18,7 +18,7 @@ export const TEXT_about_button_accessible_name =
 export const TEXT_return_home_accessible_name =
   "New York Times Sentiment Analysis. Click here to return to the home page.";
 
-  /* Component which is displayed on top side of the Analyze page. User can click
+/* Component which is displayed on top side of the Analyze page. User can click
   on all items in the display: NYT Sentiment Analysis (returns to home
   about page button (popup with info about the page), and search input box 
   (allows user to enter more queries). */

@@ -1,7 +1,4 @@
-import {
-  APISuccessResponse,
-  SuccessDataResult,
-} from "../interfaces/interfaces";
+import { APISuccessResponse } from "../interfaces/interfaces";
 
 export const mockSuccessResponse: APISuccessResponse = {
   result: "success",

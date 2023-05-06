@@ -9,8 +9,8 @@ import { SuccessDataResult } from "../../../interfaces/interfaces";
 import { useRef, useState, useEffect, useContext } from "react";
 import ToggleElement from "./ToggleElement";
 import Keywords from "./keywords/Keywords";
-import "./Results.scss";
 import { SentimentContext } from "../../../contexts/sentimentContext";
+import "./Results.scss";
 
 /* Results display for the Analyze page. Shows the sentiment, biased sentences,
 keywords, navigation bar, and the sidebar of articles analyzed */

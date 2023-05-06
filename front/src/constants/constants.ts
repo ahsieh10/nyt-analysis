@@ -1,11 +1,7 @@
+import { Sentiment } from "../enums/enums";
+
 // Constants put in a separate class in order to prevent redundancy
 export const animationDuration = 0.7;
-
-export enum Sentiment {
-  POSITIVE,
-  NEGATIVE,
-  NEUTRAL,
-}
 
 export const getSentimentBackgroundStyle = (sentiment: Sentiment) => {
   switch (sentiment) {

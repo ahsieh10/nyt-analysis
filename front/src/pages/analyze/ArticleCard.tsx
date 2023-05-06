@@ -41,10 +41,7 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
       >
         <div className="card-text">
           <div className="heading">{article.headline}</div>
-          <div className="subheading">
-            {/* {new Date(article.pub_date).toDateString()} */}
-            {article.snippet}
-          </div>
+          <div className="subheading">{article.snippet}</div>
         </div>
         {getImageUrl(article) !== "" ? (
           <div

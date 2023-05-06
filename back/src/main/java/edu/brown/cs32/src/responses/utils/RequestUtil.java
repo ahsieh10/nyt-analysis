@@ -32,6 +32,7 @@ public class RequestUtil{
     }
 
     clientConnection.disconnect();
+    System.out.println(response);
     return response;
   }
 }

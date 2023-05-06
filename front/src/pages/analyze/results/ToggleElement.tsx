@@ -1,9 +1,9 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import "./ToggleElement.scss";
 import { SentimentContext } from "../../../contexts/sentimentContext";
 import { getSentimentTextStyle } from "../../../constants/constants";
+import "./ToggleElement.scss";
 
-// Helper component that makes the Analyze page responsive
+// Component that allow for toggling between the different result sections
 interface ToggleElementProps {
   label: string;
   active: boolean;
@@ -55,7 +55,6 @@ const ToggleElement = ({
       ref={elementRef}
       className={`toggle ${active ? getSentimentTextStyle(sentiment) : ""}`}
       onClick={handleClick}
-      // style={active ? { color: "#3aacff" } : {}}
     >
       {label}
     </span>

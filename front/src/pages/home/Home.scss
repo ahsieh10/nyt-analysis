@@ -84,19 +84,17 @@
     border-width: 2px;
     border-radius: 50%;
     background-color: #ffffff;
-    // margin-top: 770px;
-    // margin-left: -35px;
     bottom: 40px;
     left: 40px;
 
     .button-content-home {
       text-align: center;
-      font-family: 'Playfair Display';
+      font-family: "Playfair Display";
       font-style: normal;
       font-weight: 700;
       font-size: 14px;
       color: #b8b8b8;
-      }
+    }
 
     &:hover {
       background-color: #8d8d8d;
