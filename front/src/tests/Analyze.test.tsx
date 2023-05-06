@@ -15,6 +15,8 @@ import {
 } from "../components/Navbar";
 import { act } from "react-dom/test-utils";
 
+/* Note: This file performs integration testing; the server must be running. */
+
 let submitButton: HTMLElement;
 let inputBox: HTMLElement;
 let aboutButton: HTMLElement;
@@ -67,15 +69,8 @@ test("tests for valid query", async () => {
     () => {
       const { getByText, getAllByText } = within(screen.getByRole("main-body"));
       expect(getByText(/OVERALL SENTIMENT/i)).toBeInTheDocument();
-      // expect(getByText(/NEUTRAL/i)).toBeInTheDocument();
       expect(getByText(/MOST BIASED SENTENCES/i)).toBeInTheDocument();
-      // expect(
-      //   getByText(
-      //     /In virtually every circumstance that comes to mind a steaming pile of rice is stellar on its own./i
-      //   )
-      // ).toBeInTheDocument();
       expect(getAllByText(/KEYWORDS/i).length).toBeGreaterThan(1);
-      // expect(getAllByText(/SOUTH CHINA SEA/i).length).toBeGreaterThan(1);
       expect(getByText(/ARTICLES ANALYZED/i)).toBeInTheDocument();
     },
     { timeout: 10000 }
@@ -90,9 +85,8 @@ test("tests for 1 valid query then 1 invalid query", async () => {
 
   await waitFor(
     () => {
-      const { getByText, getAllByText } = within(screen.getByRole("main-body"));
+      const { getByText } = within(screen.getByRole("main-body"));
       expect(getByText(/OVERALL SENTIMENT/i)).toBeInTheDocument();
-      // expect(getByText(/NEUTRAL/i)).toBeInTheDocument();
       expect(getByText(/MOST BIASED SENTENCES/i)).toBeInTheDocument();
     },
     { timeout: 10000 }
@@ -122,9 +116,8 @@ test("tests for 1 valid query, 1 invalid query, then 1 valid query", async () =>
 
   await waitFor(
     () => {
-      const { getByText, getAllByText } = within(screen.getByRole("main-body"));
+      const { getByText } = within(screen.getByRole("main-body"));
       expect(getByText(/OVERALL SENTIMENT/i)).toBeInTheDocument();
-      // expect(getByText(/NEUTRAL/i)).toBeInTheDocument();
       expect(getByText(/MOST BIASED SENTENCES/i)).toBeInTheDocument();
     },
     { timeout: 10000 }
@@ -145,7 +138,7 @@ test("tests for 1 valid query, 1 invalid query, then 1 valid query", async () =>
     { timeout: 10000 }
   );
 
-  act(async () => {
+  act(() => {
     userEvent.clear(inputBox); // clears the previous queries from the box
     userEvent.type(inputBox, "china");
     userEvent.click(submitButton);
@@ -153,8 +146,7 @@ test("tests for 1 valid query, 1 invalid query, then 1 valid query", async () =>
 
   await waitFor(
     () => {
-      const { getByText, getAllByText } = within(screen.getByRole("main-body"));
-      // expect(getByText(/NEUTRAL/i)).toBeInTheDocument();
+      const { getByText } = within(screen.getByRole("main-body"));
       expect(getByText(/MOST BIASED SENTENCES/i)).toBeInTheDocument();
     },
     { timeout: 10000 }
@@ -169,9 +161,8 @@ test("tests for 2 sequential valid queries", async () => {
 
   await waitFor(
     () => {
-      const { getByText, getAllByText } = within(screen.getByRole("main-body"));
+      const { getByText } = within(screen.getByRole("main-body"));
       expect(getByText(/OVERALL SENTIMENT/i)).toBeInTheDocument();
-      // expect(getByText(/NEUTRAL/i)).toBeInTheDocument();
       expect(getByText(/MOST BIASED SENTENCES/i)).toBeInTheDocument();
     },
     { timeout: 10000 }
@@ -185,8 +176,7 @@ test("tests for 2 sequential valid queries", async () => {
 
   await waitFor(
     () => {
-      const { getByText, getAllByText } = within(screen.getByRole("main-body"));
-      // expect(getByText(/NEUTRAL/i)).toBeInTheDocument();
+      const { getByText } = within(screen.getByRole("main-body"));
       expect(getByText(/MOST BIASED SENTENCES/i)).toBeInTheDocument();
     },
     { timeout: 10000 }
@@ -201,9 +191,8 @@ test("integration testing: tests for 1 valid query, then click to return to home
 
   await waitFor(
     () => {
-      const { getByText, getAllByText } = within(screen.getByRole("main-body"));
+      const { getByText } = within(screen.getByRole("main-body"));
       expect(getByText(/OVERALL SENTIMENT/i)).toBeInTheDocument();
-      // expect(getByText(/NEUTRAL/i)).toBeInTheDocument();
       expect(getByText(/MOST BIASED SENTENCES/i)).toBeInTheDocument();
     },
     { timeout: 10000 }

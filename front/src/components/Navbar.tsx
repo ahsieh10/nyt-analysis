@@ -91,12 +91,13 @@ const Navbar = ({ queryParam, submitInput, togglePopup }: NavbarProps) => {
         {logoText}
       </Link>
       <div className="input-area">
-        <button className="about-btn" onClick={togglePopup}>
-          <div
-            className="button-content"
-            aria-label={TEXT_about_button_accessible_name}
-            role="about-button"
-          >
+        <button
+          className="about-btn"
+          onClick={togglePopup}
+          aria-label={TEXT_about_button_accessible_name}
+          role="about-button"
+        >
+          <div className="button-content">
             <h2>i</h2>
           </div>
         </button>
