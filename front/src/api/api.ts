@@ -35,10 +35,8 @@ export const getArticleAnalysis = async (
   query: string
 ): Promise<SuccessDataResult | APIErrorResponse> => {
   const baseUrl = "http://localhost:4000/search?";
-  console.log(`${baseUrl}keyword=${query}`);
   const res = await fetch(`${baseUrl}keyword=${query}`);
   const data = await res.json();
-  console.log(data);
   if (isResultSuccessResponse(data)) {
     return data.data;
   } else if (isResultErrorResponse(data)) {

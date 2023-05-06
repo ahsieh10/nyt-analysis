@@ -2,7 +2,6 @@ import "./Keyword.scss";
 import { motion } from "framer-motion";
 import { useContext, useState } from "react";
 import {
-  getSentimentBackgroundStyle,
   getSentimentBorderStyle,
   getSentimentHighlightBackgroundStyle,
   getSentimentTextStyle,

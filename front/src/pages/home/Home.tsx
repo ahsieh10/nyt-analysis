@@ -46,7 +46,6 @@ const Home = () => {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      console.log(e.key);
       if (e.key === "a") {
         togglePopup();
       }
@@ -133,6 +132,7 @@ const Home = () => {
             setImgLoaded(true);
           }}
           src="./assets/images/landing-img.jpg"
+          alt="NYT Newspaper"
         />
       </motion.div>
       <Popup popupActive={popup} togglePopup={togglePopup} />

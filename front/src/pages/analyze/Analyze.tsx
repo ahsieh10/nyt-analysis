@@ -103,7 +103,6 @@ const Analyze = () => {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      console.log(e.key);
       if (e.key === "a") {
         togglePopup();
       }

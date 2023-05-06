@@ -1,10 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import "./ToggleElement.scss";
 import { SentimentContext } from "../../../contexts/sentimentContext";
-import {
-  getSentimentBackgroundStyle,
-  getSentimentTextStyle,
-} from "../../../constants/constants";
+import { getSentimentTextStyle } from "../../../constants/constants";
 
 interface ToggleElementProps {
   label: string;
@@ -36,9 +33,9 @@ const ToggleElement = ({
   }, [active, fontsLoaded]);
 
   useEffect(() => {
-    document.fonts.ready.then(() => {
-      setFontsLoaded(true);
-    });
+    // document.fonts.ready.then(() => {
+    setFontsLoaded(true);
+    // });
   }, []);
 
   useEffect(() => {

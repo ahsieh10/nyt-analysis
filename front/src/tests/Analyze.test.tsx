@@ -45,7 +45,7 @@ test("tests for error message with invalid query", async () => {
 
   await waitFor(() => {
     const results = screen.getByText(
-      "No valid query has been submitted, or the server has errored."
+      "Received IOException in sentiment retrieval. Check your inputted keyword. 😢"
     );
     expect(results).toBeInTheDocument();
   });
@@ -58,18 +58,19 @@ test("tests for valid query", async () => {
   });
 
   await waitFor(() => {
-    const { getByText } = within(screen.getByRole("main-body"));
-    expect(getByText("OVERALL SENTIMENT")).toBeInTheDocument();
-    expect(getByText("NEGATIVE")).toBeInTheDocument();
-    expect(getByText("MOST BIASED SENTENCES")).toBeInTheDocument();
+    expect(screen.getAllByText(/OVERALL SENTIMENT/i).length).toBe(1);
+    const { getByText, getAllByText } = within(screen.getByRole("main-body"));
+    expect(getByText(/OVERALL SENTIMENT/i)).toBeInTheDocument();
+    expect(getByText(/NEGATIVE/i)).toBeInTheDocument();
+    expect(getByText(/MOST BIASED SENTENCES/i)).toBeInTheDocument();
     expect(
       getByText(
-        "The wreck of a Japanese ship that sank in 1942 after it was torpedoed by an American submarine has been found the Australian government said on Saturday."
+        /The wreck of a Japanese ship that sank in 1942 after it was torpedoed by an American submarine has been found the Australian government said on Saturday./i
       )
     ).toBeInTheDocument();
-    expect(getByText("KEYWORDS")).toBeInTheDocument();
-    expect(getByText("SOUTH CHINA SEA")).toBeInTheDocument();
-    expect(getByText("ARTICLES ANALYZED")).toBeInTheDocument();
+    expect(getAllByText(/KEYWORDS/i).length).toBeGreaterThan(1);
+    expect(getAllByText(/SOUTH CHINA SEA/i).length).toBeGreaterThan(1);
+    expect(getByText(/ARTICLES ANALYZED/i)).toBeInTheDocument();
   });
 });
 

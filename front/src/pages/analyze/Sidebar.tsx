@@ -18,18 +18,18 @@ const Sidebar = ({ result }: SidebarProps) => {
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: animationDuration, ease: "easeInOut" }}
     >
-      {/* <Scrollbars style={{ width: "100%", height: "100%" }}> */}
-      <div
-        className="sidebar-contents"
-        aria-label={TEXT_sidebar_accessible_name}
-        role="sidebar"
-      >
-        <div className="section-subheading"> Articles Analyzed</div>
-        {result.articles.map((article) => (
-          <ArticleCard key={article.webUrl} article={article} />
-        ))}
-      </div>
-      {/* </Scrollbars> */}
+      <Scrollbars style={{ width: "100%", height: "100%" }}>
+        <div
+          className="sidebar-contents"
+          aria-label={TEXT_sidebar_accessible_name}
+          role="sidebar"
+        >
+          <div className="section-subheading"> Articles Analyzed</div>
+          {result.articles.map((article) => (
+            <ArticleCard key={article.webUrl} article={article} />
+          ))}
+        </div>
+      </Scrollbars>
     </motion.div>
   );
 };
