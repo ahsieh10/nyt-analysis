@@ -1,11 +1,11 @@
 @use "../../styles/_colors" as colors;
+@use "../../styles/_constants" as constants;
 
 .sidebar {
-  // change 6rem to a value controlled by a variable
   flex-shrink: 0;
   position: sticky;
-  top: 5rem;
-  height: calc(100vh - 6rem);
+  top: constants.$navbarHeight;
+  height: calc(100vh - constants.$navbarHeight - 1rem);
   overflow-y: auto;
   width: 350px;
   border: 1px solid colors.$lightGrey;
