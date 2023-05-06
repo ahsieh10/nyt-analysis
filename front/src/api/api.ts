@@ -4,6 +4,8 @@ import {
   SuccessDataResult,
 } from "../interfaces/interfaces";
 
+// Controller for the front-end. Handles fetching and returning from calls to
+// the NYT and sentiment APIs.
 export const isResultSuccessResponse = (
   rjson: any
 ): rjson is APISuccessResponse => {

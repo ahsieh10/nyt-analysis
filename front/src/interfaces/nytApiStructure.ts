@@ -1,3 +1,4 @@
+// Full structure of the New York Times API.
 interface Media {
     rank: number;
     subtype: string;

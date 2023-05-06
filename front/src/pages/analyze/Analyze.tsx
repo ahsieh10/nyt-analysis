@@ -16,6 +16,12 @@ import "./Analyze.scss";
 export const TEXT_navbar_accessible_name =
   "This is the navigation bar. You can get back to the home page from here, learn about the app through the info page, or search for more terms.";
 
+/* Analyze page for the New York Times Sentiment Analysis. If a valid query
+is entered, there is a loading screen displayed while the API call is occurring
+and being processed. Afterwards, a results page is loaded with components of
+the navigation bar, results title, sentiment summary, biased sentences, 
+keywords grid, and sidebar of the articles analyzed. If an invalid query is
+entered, a user-friendly error message is displayed. */
 const Analyze = () => {
   const [params, setParams] = useSearchParams();
   const [queryParam, setQueryParam] = useState("");

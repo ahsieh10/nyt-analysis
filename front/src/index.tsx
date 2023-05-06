@@ -4,6 +4,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router} from "react-router-dom";
 
+// This is the entry point that React uses to render the app.
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );

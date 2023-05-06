@@ -8,6 +8,8 @@ import {
 } from "../../constants/constants";
 import "./ArticleCard.scss";
 
+// Component for the Analyze page. Displays clickable image url buttons that
+// enable the user to go to a specific article out of the 10 that were analyzed.
 interface ArticleCardProps {
   article: Article;
 }

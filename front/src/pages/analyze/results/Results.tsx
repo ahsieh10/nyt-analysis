@@ -12,6 +12,8 @@ import Keywords from "./keywords/Keywords";
 import "./Results.scss";
 import { SentimentContext } from "../../../contexts/sentimentContext";
 
+/* Results display for the Analyze page. Shows the sentiment, biased sentences,
+keywords, navigation bar, and the sidebar of articles analyzed */
 interface ResultsProps {
   result: SuccessDataResult;
   query: string;

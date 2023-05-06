@@ -2,6 +2,7 @@ import { Scrollbars } from "react-custom-scrollbars-2";
 import { AnimatePresence, motion } from "framer-motion";
 import "./AboutPopup.scss";
 
+// Component that sets up the popup display on both the Analyze and Home pages.
 interface PopupProps {
   popupActive: boolean;
   togglePopup: () => void;

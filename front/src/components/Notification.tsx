@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { IoIosWarning } from "react-icons/io";
 import "./Notification.scss";
 
+// Notification helper component for an invalid query, sets up structure.
 interface NotificationProps {
   message: string;
   animationState: "hidden" | "shown";

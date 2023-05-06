@@ -12,10 +12,16 @@ export const TEXT_home_page_accessible_name =
 export const TEXT_input_box_accessible_name =
   "This is the input box. Search for a topic to find a summary of the sentiment analysis for that query.";
 export const TEXT_search_button_accessible_name =
-  "This is the submitt button. Click it to get your results.";
+  "This is the submit button. Click it to get your results.";
 export const TEXT_about_button_accessible_name =
   "Here is the about button. Click it to learn more about the app and how it works.";
 
+/* Home page for the New York Times Sentiment Analysis. Includes a display of
+a welcome message, about page button, input query box, and search button. All
+components aside from the welcome message are clickable. If clicked, the about
+page button results in a popup describing the purpose of the app, the input box
+enables users to start writing queries to the API, and the search button enables
+users to submit those queries (although the enter key works as well). */
 const Home = () => {
   const navigate = useNavigate();
   const [input, setInput] = useState("");

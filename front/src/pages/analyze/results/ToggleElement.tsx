@@ -3,6 +3,7 @@ import "./ToggleElement.scss";
 import { SentimentContext } from "../../../contexts/sentimentContext";
 import { getSentimentTextStyle } from "../../../constants/constants";
 
+// Helper component that makes the Analyze page responsive
 interface ToggleElementProps {
   label: string;
   active: boolean;

@@ -1,3 +1,4 @@
+// Constants put in a separate class in order to prevent redundancy
 export const animationDuration = 0.7;
 
 export enum Sentiment {

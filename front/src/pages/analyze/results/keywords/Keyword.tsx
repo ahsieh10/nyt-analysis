@@ -8,6 +8,8 @@ import {
 } from "../../../../constants/constants";
 import { SentimentContext } from "../../../../contexts/sentimentContext";
 
+/* Component setting up structure for the keywords section of the Analyze page.
+User can click on any of the keyword buttons to submit a query for that word */
 interface KeywordProps {
   word: string;
   onWordClick: (word: string) => void;

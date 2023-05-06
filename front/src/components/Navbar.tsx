@@ -15,7 +15,13 @@ export const TEXT_submit_button_accessible_name =
   "This is the submit button. Click on it or press enter to search for your topic.";
 export const TEXT_about_button_accessible_name =
   "Here is the about button. Click it to learn more about the app and how it works.";
+export const TEXT_return_home_accessible_name =
+  "New York Times Sentiment Analysis. Click here to return to the home page.";
 
+  /* Component which is displayed on top side of the Analyze page. User can click
+  on all items in the display: NYT Sentiment Analysis (returns to home
+  about page button (popup with info about the page), and search input box 
+  (allows user to enter more queries). */
 interface NavbarProps {
   queryParam: string;
   submitInput: (input: string) => void;
@@ -76,7 +82,12 @@ const Navbar = ({ queryParam, submitInput, togglePopup }: NavbarProps) => {
 
   return (
     <nav className="navbar">
-      <Link to="/" className="logo">
+      <Link
+        to="/"
+        className="logo"
+        aria-label={TEXT_return_home_accessible_name}
+        role="return-home"
+      >
         {logoText}
       </Link>
       <div className="input-area">

@@ -5,6 +5,7 @@ import "./ResultSection.scss";
 export const TEXT_results_accessible_name =
   "The results have been loaded. There is the overall sentiment, followed by most biased sentences, and then keywords from the articles.";
 
+// Helper component to the results component that sets up the structure cleanly.
 interface ResultSectionProps {
   title: string;
   innerContent: React.ReactNode;

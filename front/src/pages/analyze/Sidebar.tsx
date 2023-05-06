@@ -7,6 +7,9 @@ import "./Sidebar.scss";
 export const TEXT_sidebar_accessible_name =
   "This is the sidebar. It has clickable buttons that lead to links of the top 10 articles used to calculate the sentiment analysis";
 
+// Sidebar component that displays the article card buttons and makes the
+// display scrollable
+
 interface SidebarProps {
   result: SuccessDataResult;
 }
