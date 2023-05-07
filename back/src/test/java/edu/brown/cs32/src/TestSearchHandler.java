@@ -94,33 +94,6 @@ public class TestSearchHandler {
     return map;
   }
 
-//  /**
-//   * Checks if two article lists are the same
-//   * @param other - sentiment response to be compared
-//   * @return true if same, false if not
-//   */
-//  private boolean sameArticleList(List<Article> first, List<Article> other) {
-//    for (int i =0; i< first.size(); i++) {
-//      if (!this.sameArticle(first.get(i), other.get(i))) {
-//        return false;
-//      }
-//    }
-//    return true;
-//  }
-//
-//  /**
-//   * Helper that checks if two articles are the same
-//   * @param first - first article
-//   * @param other - second article
-//   * @return true if same, false if not
-//   */
-//  private boolean sameArticle(Article first, Article other) {
-//    return (first.getLeadParagraph().equals(other.getLeadParagraph())
-//        && first.getAbstract().equals(other.getAbstract())
-//        && first.getSnippet().equals(other.getSnippet())
-//        && first.getUrl().equals(other.getUrl()));
-//  }
-
   /**
    * Tests the response for a good search
    *
@@ -195,6 +168,51 @@ public class TestSearchHandler {
 
     assertEquals(result.get("status"), "error_bad_json");
     assertEquals(result.get("error_message"), "Invalid input.");
+  }
+
+    /**
+   * Fuzz test to make sure server does not crash given random keywords
+   * @throws IOException
+   */
+  @Test
+  public void testFuzz() throws IOException{
+
+    String randomString = "search?keyword=";;
+
+    for(int i = 0; i < 1000; i++) {
+
+      String randomWord = getRandomStringBounded(6, 45, 126);
+      randomString += randomWord;
+
+      HttpURLConnection clientConnection = this.tryRequest(randomString);
+      if (clientConnection.getResponseCode() >= 400 && clientConnection.getResponseCode() < 500) {
+        System.out.println("Response Code:" + clientConnection.getResponseCode());
+      } else if (clientConnection.getResponseCode() > 500) {
+        System.out.println("Server Error Response Code:" + clientConnection.getResponseCode());
+      }
+
+      assertEquals(200, clientConnection.getResponseCode());
+      clientConnection.disconnect();
+    }
+  }
+
+  /**
+   * Method below from: https://github.com/cs0320-s2023/csv-tnelson.git
+   * Helper methods that generates random strings but does not guarantee an alpha-numeric string
+   * @param length The length of the string to generate
+   * @param first the first ASCII-code in the character range allowed
+   * @param last the last ASCII-code in the character range allowed
+   * @return a random string of length bytes
+   */
+  private static String getRandomStringBounded(int length, int first, int last) {
+    final ThreadLocalRandom r = ThreadLocalRandom.current();
+    StringBuilder sb = new StringBuilder();
+    for(int iCount=0;iCount<length;iCount++) {
+      // upper-bound is exclusive
+      int code = r.nextInt(first, last+1);
+      sb.append((char) code);
+    }
+    return sb.toString();
   }
 
 }

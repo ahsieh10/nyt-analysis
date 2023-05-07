@@ -13,6 +13,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+  * Response class that gets data from both NYT and MC API calls and formats
+  * into a response
+  */
 public class ManualResponse implements CombinedResponse {
 
   private NYTArticleAPI nytQuery;

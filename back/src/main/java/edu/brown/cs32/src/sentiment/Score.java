@@ -22,7 +22,7 @@ public class Score {
    * @return sentence text
    */
   public String getText() {
-    return text;
+    return "" + this.text;
   }
 
 
@@ -31,7 +31,7 @@ public class Score {
    * @return sentence score
    */
   public Double getScore() {
-    return score;
+    return this.score;
   }
 
   /**

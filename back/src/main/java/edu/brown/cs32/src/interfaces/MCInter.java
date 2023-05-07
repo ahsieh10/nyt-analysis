@@ -13,6 +13,6 @@ public interface MCInter {
    * @return overall sentiment in those lead paragraphs
    * @throws IOException
    */
-//  String getSentiment(List<String> articles) throws IOException;
+
   SentimentJson apiRequest(List<String> articles) throws IOException;
 }

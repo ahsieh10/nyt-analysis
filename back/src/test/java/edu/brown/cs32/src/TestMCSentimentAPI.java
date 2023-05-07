@@ -89,13 +89,6 @@ public class TestMCSentimentAPI {
         + "The%20service%20could%20not%20have%20been%20better.%20But%20they%20were%20rude%20to%20others."
         + "Spent%20too%20much%20money%20for%20food%20that%20made%20me%20hungry.&model=general";
     assertEquals(expected2, result2);
-
-//    String text = "WASHINGTON — Treasury Secretary Janet L. Yellen on Thursday called for a “constructive” and “healthy” economic relationship between the United States and China, one in which the two nations could work together to confront global challenges in spite of their conflicting national security interests.";
-//    text = text.replaceAll("[\\p{Punct}&&[^.?!]]", " ");
-//    text = text.replaceAll("— | “", " ");
-//    text = text.replaceAll("\\? | !", ".");
-//    text = text.replaceAll("”", " ");
-//    System.out.print(text);
   }
 
   /**

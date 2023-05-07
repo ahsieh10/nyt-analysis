@@ -13,8 +13,14 @@ import java.util.Map;
 import java.util.Arrays;
 import edu.brown.cs32.mocks.MockArticles;
 
+/**
+  * Unit tests for NYT API
+  */
 public class TestNYTArticleAPI {
 
+  /**
+   * Tests the method to get articles from the result of api call
+   */
   @Test
   public void testGetArticles() throws IOException {
     NYTArticleAPI api = new NYTArticleAPI(new NYTMock());
@@ -40,6 +46,9 @@ public class TestNYTArticleAPI {
     assertEquals(articles.get(1).getThumbnail(), "");
   }
 
+  /**
+   * Tests filter paragraphs method
+   */
   @Test
   public void testFilterParagraphs(){
     NYTArticleAPI api = new NYTArticleAPI(new NYTMock());
@@ -50,6 +59,9 @@ public class TestNYTArticleAPI {
     assertEquals(paragraphs, Arrays.asList(new String[]{"For years, Xi Jinping, China’s leader, has railed against greed and corruption in the country’s financial sector, making an example of a few prominent figures along the way.", "TAIPEI, Taiwan — A Taiwan-based publisher who disappeared while in China has been detained for suspected violations of security laws, Chinese authorities confirmed on Wednesday, fanning concerns in Taiwan that Beijing is sending a warning to the island’s vibrant publishing sector."}));
   }
 
+  /**
+   * Tests NYT API when given bad input 
+   */
   @Test
   public void testNonexistentKeyword(){
     NYTArticleAPI api = new NYTArticleAPI(new NYTMock());
