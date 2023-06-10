@@ -1,5 +1,3 @@
-# final-project-ahsieh10-mma32-pnguye37-szhan257
-
 # Project details
 ### Project name: 
 NYT Sentiment Analysis
